@@ -16,7 +16,7 @@ composer require fidum/laravel-dashboard-vapor-metrics-tile
 
 ## Usage
 
-In your dashboard view you use the component.
+In your dashboard view you use these components.
 
 ```html
 <x-dashboard>
