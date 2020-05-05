@@ -8,7 +8,6 @@ use Fidum\VaporMetricsTile\Commands\FetchVaporEnvironmentMetricsCommand;
 use Fidum\VaporMetricsTile\Components\VaporCacheMetricsComponent;
 use Fidum\VaporMetricsTile\Components\VaporDatabaseMetricsComponent;
 use Fidum\VaporMetricsTile\Components\VaporEnvironmentMetricsComponent;
-use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
