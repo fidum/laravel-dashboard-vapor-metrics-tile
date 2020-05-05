@@ -20,7 +20,9 @@ In your dashboard view you use the component.
 
 ```html
 <x-dashboard>
-    <livewire:vapor-environment-metrics tileName="My Production Project" position="a1:a2" />
+    <livewire:vapor-environment-metrics-tile tileName="Production" position="a1:a3" />
+    <livewire:vapor-cache-metrics-tile tileName="Cache" position="a4:a5" />
+    <livewire:vapor-database-metrics-tile tileName="Database" position="a6:a7" />
 </x-dashboard>
 ```
 
