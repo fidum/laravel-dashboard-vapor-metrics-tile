@@ -2,7 +2,6 @@
 
 namespace Fidum\VaporMetricsTile\Stores;
 
-use Illuminate\Support\Str;
 use Spatie\Dashboard\Models\Tile;
 
 trait VaporMetricsStoreTrait

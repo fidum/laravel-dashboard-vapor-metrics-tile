@@ -7,7 +7,6 @@ use Fidum\VaporMetricsTile\VaporMetricsClient;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 class FetchVaporCacheMetricsCommand extends Command
 {
