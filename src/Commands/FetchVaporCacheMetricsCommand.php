@@ -7,6 +7,7 @@ use Fidum\VaporMetricsTile\VaporMetricsClient;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 class FetchVaporCacheMetricsCommand extends Command
 {
@@ -21,12 +22,12 @@ class FetchVaporCacheMetricsCommand extends Command
         $caches = new Collection($configuredProjects);
 
         $caches->each(function (array $config, $name) {
-            $key = VaporCacheMetricsStore::key($name, $config);
+            $key = $config['cache_id'];
             $token = Arr::get($config, 'secret');
 
             $data = VaporMetricsClient::make($token)->cacheMetricsRaw(
-                $config['cache_name'],
-                Arr::get($config, 'period', '1d'),
+                $key,
+                Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD),
             );
 
             VaporCacheMetricsStore::make()->setMetrics($key, $data);

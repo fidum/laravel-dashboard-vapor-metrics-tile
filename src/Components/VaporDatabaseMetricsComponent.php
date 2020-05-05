@@ -3,6 +3,7 @@
 namespace Fidum\VaporMetricsTile\Components;
 
 use Fidum\VaporMetricsTile\Stores\VaporDatabaseMetricsStore;
+use Fidum\VaporMetricsTile\VaporMetricsClient;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 
@@ -20,13 +21,13 @@ class VaporDatabaseMetricsComponent extends Component
 
     public function render()
     {
-        $config = config('dashboard.tiles.vapor-metrics.databases.' . $this->tileName) ?? [];
+        $config = config('dashboard.tiles.vapor_metrics.databases.' . $this->tileName) ?? [];
 
-        $key = VaporDatabaseMetricsStore::key($this->tileName, $config);
+        $key = Arr::get($config, 'database_id', 0);
 
-        return view('tiles.vapor-cache-metrics', [
+        return view('dashboard-vapor-metrics-tiles::database.tile', [
             'data' => VaporDatabaseMetricsStore::make()->metrics($key),
-            'period' => Arr::get($config, 'period', '1d'),
+            'period' => Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD),
             'refreshIntervalInSeconds' => Arr::get($config, 'refresh_interval_in_seconds', 300),
         ]);
     }

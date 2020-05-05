@@ -21,13 +21,13 @@ class FetchVaporEnvironmentMetricsCommand extends Command
         $environments = new Collection($configuredProjects);
 
         $environments->each(function (array $config, string $name) {
-            $key = VaporEnvironmentMetricsStore::key($name, $config);
+            $key = VaporEnvironmentMetricsStore::key($name);
             $token = Arr::get($config, 'secret');
 
             $data = VaporMetricsClient::make($token)->environmentMetricsRaw(
                 $config['project_id'],
                 Arr::get($config, 'environment', 'production'),
-                Arr::get($config, 'period', '1d'),
+                Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD),
             );
 
             VaporEnvironmentMetricsStore::make()->setMetrics($key, $data);

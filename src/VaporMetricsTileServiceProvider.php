@@ -12,7 +12,7 @@ use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
-class VaporMetricsTileServiceProvider extends ServiceProvider implements DeferrableProvider
+class VaporMetricsTileServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {

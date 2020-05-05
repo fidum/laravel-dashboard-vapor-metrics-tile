@@ -21,12 +21,12 @@ class FetchVaporDatabaseMetricsCommand extends Command
         $databases = new Collection($configuredProjects);
 
         $databases->each(function (array $config, $name) {
-            $key = VaporDatabaseMetricsStore::key($name, $config);
+            $key = $config['database_id'];
             $token = Arr::get($config, 'secret');
 
-            $data = VaporMetricsClient::make($token)->databaseMetrics(
-                $config['database_name'],
-                Arr::get($config, 'period', '1d'),
+            $data = VaporMetricsClient::make($token)->databaseMetricsRaw(
+                $key,
+                Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD),
             );
 
             VaporDatabaseMetricsStore::make()->setMetrics($key, $data);

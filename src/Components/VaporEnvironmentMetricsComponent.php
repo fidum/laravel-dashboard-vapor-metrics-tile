@@ -3,6 +3,7 @@
 namespace Fidum\VaporMetricsTile\Components;
 
 use Fidum\VaporMetricsTile\Stores\VaporEnvironmentMetricsStore;
+use Fidum\VaporMetricsTile\VaporMetricsClient;
 use Illuminate\Support\Arr;
 use Livewire\Component;
 
@@ -20,13 +21,13 @@ class VaporEnvironmentMetricsComponent extends Component
 
     public function render()
     {
-        $config = config('dashboard.tiles.vapor-metrics.environments.' . $this->tileName) ?? [];
+        $config = config('dashboard.tiles.vapor_metrics.environments.' . $this->tileName) ?? [];
 
-        $key = VaporEnvironmentMetricsStore::key($this->tileName, $config);
+        $key = VaporEnvironmentMetricsStore::key($this->tileName);
 
-        return view('tiles.vapor-environment-metrics', [
+        return view('dashboard-vapor-metrics-tiles::environment.tile', [
             'data' => VaporEnvironmentMetricsStore::make()->metrics($key),
-            'period' => Arr::get($config, 'period', '1d'),
+            'period' => Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD),
             'refreshIntervalInSeconds' => Arr::get($config, 'refresh_interval_in_seconds', 300),
         ]);
     }

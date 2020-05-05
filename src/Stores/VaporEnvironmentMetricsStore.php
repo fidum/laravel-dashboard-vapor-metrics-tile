@@ -2,9 +2,16 @@
 
 namespace Fidum\VaporMetricsTile\Stores;
 
+use Illuminate\Support\Str;
+
 class VaporEnvironmentMetricsStore
 {
     use VaporMetricsStoreTrait;
+
+    public static function key(string $name): string
+    {
+        return (string) Str::of($name)->snake()->lower();
+    }
 
     public static function tileName(): string
     {

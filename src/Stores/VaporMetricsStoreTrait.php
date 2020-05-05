@@ -2,6 +2,7 @@
 
 namespace Fidum\VaporMetricsTile\Stores;
 
+use Illuminate\Support\Str;
 use Spatie\Dashboard\Models\Tile;
 
 trait VaporMetricsStoreTrait
@@ -11,11 +12,6 @@ trait VaporMetricsStoreTrait
     public static function make(): self
     {
         return new static();
-    }
-
-    public static function key(string $name, array $config): string
-    {
-        return md5($name.serialize($config));
     }
 
     public function __construct()
