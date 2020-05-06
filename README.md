@@ -30,7 +30,7 @@ In your dashboard view you can use one or all or multiple of each of these compo
 
 See below for example tiles config that should go in the `config/dashboard.php` file. The `tileName` attribute value above should match the keys in the configs below:
 
-```php*
+```php
 'tiles' => [
     'vapor_metrics' => [
         'secret' => env('VAPOR_API_TOKEN'),
