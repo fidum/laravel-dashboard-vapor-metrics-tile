@@ -9,6 +9,8 @@ use Livewire\Component;
 
 class VaporCacheMetricsComponent extends Component
 {
+    use VaporMetricsComponentTrait;
+
     public string $position;
 
     public string $tileName;
@@ -22,13 +24,12 @@ class VaporCacheMetricsComponent extends Component
     public function render()
     {
         $config = config('dashboard.tiles.vapor_metrics.caches.' . $this->tileName) ?? [];
-        $refresh = Arr::get($config, 'refresh_interval_in_seconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
-        $key = Arr::get($config, 'cache_id', 0);
+        $key = $config['cache_id'] ?? 0;
 
         return view('dashboard-vapor-metrics-tiles::cache.tile', [
             'data' => VaporCacheMetricsStore::make()->metrics($key),
-            'period' => Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD),
-            'refreshIntervalInSeconds' => $refresh,
+            'period' => $this->period($config),
+            'refreshIntervalInSeconds' => $this->refreshIntervalInSeconds($config),
         ]);
     }
 }
