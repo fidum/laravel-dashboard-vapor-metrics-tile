@@ -19,7 +19,7 @@ class FetchVaporEnvironmentMetricsCommandTest extends TestCase
             ->assertExitCode(0)
             ->execute();
 
-        $this->assertDatabaseCount('dashboard_tiles', 1);
+        $this->assertSame(1, Tile::count());
 
         $this->assertSame(Tile::first()->only(['name', 'data']), [
             'name' => VaporEnvironmentMetricsStore::tileName(),
