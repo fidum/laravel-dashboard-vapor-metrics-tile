@@ -51,7 +51,7 @@ return [
             'environments' => [ // Leave empty if you don't want any envrionment tiles
                 'My Staging Website' => [ // Key will be used as the title of the displayed tile                
                     'project_id' => 1111, // required: The id of your vapor project
-                    'environment' => 'staging' // optional: Defaults to 'production'
+                    'environment' => 'staging', // optional: Defaults to 'production'
                     'period' => '7d', // optional: 1m, 5m, 30m, 1h, 8h, 1d (default), 3d, 7d, 1M
                     'refresh_interval_in_seconds' => 60, // optional: override individual tile
                     'secret' => null, // :optional: override individual tile
