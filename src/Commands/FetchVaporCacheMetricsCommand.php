@@ -17,7 +17,7 @@ class FetchVaporCacheMetricsCommand extends Command
     {
         $configs = config('dashboard.tiles.vapor_metrics.caches');
 
-        collect($configs)->each(function (array $config, $name) {
+        collect($configs)->each(function (array $config) {
             $id = $config['cache_id'];
             $period = Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD);
             $secret = Arr::get($config, 'secret');
