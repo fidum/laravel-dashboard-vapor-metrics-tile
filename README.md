@@ -4,9 +4,9 @@
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/fidum/laravel-dashboard-vapor-metrics-tile/run-tests?label=tests)](https://github.com/fidum/laravel-dashboard-vapor-metrics-tile/actions?query=workflow%3Arun-tests+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/fidum/laravel-dashboard-vapor-metrics-tile.svg?style=flat-square)](https://packagist.org/packages/fidum/laravel-dashboard-vapor-metrics-tile)
 
-This tile can be used on [the Laravel Dashboard](https://docs.spatie.be/laravel-dashboard).
-
 ![Preview](docs/preview.png)
+
+This tile can be used on [the Laravel Dashboard](https://docs.spatie.be/laravel-dashboard).
 
 ## Installation
 
