@@ -86,12 +86,8 @@ attributes are **required**. The `tileName` attribute value needs to match the n
     <livewire:vapor-database-metrics-tile tileName="My Database" position="a6:a7" />
 </x-dashboard>
 ```
-
-```php
-
 ## Testing
-
-``` bash
+```bash
 composer test
 ```
 
