@@ -9,15 +9,15 @@
         <ul class="self-center divide-y-2">
             <li>
                 {{ number_format($data['averageDatabaseCpuUtilization'] ?? 0) }}%
-                <span class="text-dimmed">Average CPU Utilization</span>
+                <span class="text-dimmed text-xs">Average CPU Utilization</span>
             </li>
             <li>
                 {{ number_format($data['averageDatabaseConnections'] ?? 0) }}
-                <span class="text-dimmed">Average Database Connections</span>
+                <span class="text-dimmed text-xs">Average Database Connections</span>
             </li>
             <li>
                 {{ number_format($data['maxDatabaseConnections'] ?? 0) }}
-                <span class="text-dimmed">Max Database Connections</span>
+                <span class="text-dimmed text-xs">Max Database Connections</span>
             </li>
         </ul>
     </div>

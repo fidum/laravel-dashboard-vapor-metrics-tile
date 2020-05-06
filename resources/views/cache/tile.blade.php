@@ -17,9 +17,18 @@
                         <h3 class="text-md">Node {{ $node + 1 }}</h3>
                     @endif
                     <ul class="self-center space-y-1 text-sm {{$displayNodeClass}}">
-                        <li> {{ number_format($data['averageCacheCpuUtilization'][$node] ?? 0).'%' }} <span class="text-dimmed">Average CPU Utilization</span></li>
-                        <li> {{ number_format($data['totalCacheHits'][$node] ?? 0) }} <span class="text-dimmed">Cache Hits</span></li>
-                        <li> {{ number_format($data['totalCacheMisses'][$node] ?? 0) }} <span class="text-dimmed">Cache Misses</span></li>
+                        <li>
+                            {{ number_format($data['averageCacheCpuUtilization'][$node] ?? 0).'%' }}
+                            <span class="text-dimmed text-xs">Average CPU Utilization</span>
+                        </li>
+                        <li>
+                            {{ number_format($data['totalCacheHits'][$node] ?? 0) }}
+                            <span class="text-dimmed text-xs">Cache Hits</span>
+                        </li>
+                        <li>
+                            {{ number_format($data['totalCacheMisses'][$node] ?? 0) }}
+                            <span class="text-dimmed text-xs">Cache Misses</span>
+                        </li>
                     </ul>
                 </li>
             @endforeach

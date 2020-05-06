@@ -26,6 +26,26 @@ In your dashboard view you can use one or all or multiple of each of these compo
 </x-dashboard>
 ```
 
+See below for example tiles config that should go in the `config/dashboard.php` file. The `tileName` attribute value above should match the keys in the configs below:
+
+```php
+'tiles' => [
+    'vapor_metrics' => [
+        'secret' => env('VAPOR_API_TOKEN'),
+        'databases' => [
+            'Database' => ['database_id' => 569],
+        ],
+        'caches' => [
+            'Cache' => ['cache_id' => 110],
+        ],
+        'environments' => [
+            'My Website' => ['project_id' => 1350],
+            'Preview' => ['project_id' => 1350, 'environment' => 'staging'],
+        ],
+    ],
+],
+```
+
 ## Testing
 
 ``` bash

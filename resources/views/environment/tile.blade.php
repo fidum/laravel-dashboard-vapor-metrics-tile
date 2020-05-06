@@ -9,31 +9,31 @@
         <ul class="self-center divide-y-2">
             <li>
                 {{ number_format($data['totalRestApiRequests'] ?? 0) }}
-                <span class="text-dimmed">API Gateway Requests</span>
+                <span class="text-dimmed text-xs">API Gateway Requests</span>
             </li>
             <li>
                 {{ number_format($data['totalFunctionInvocations'] ?? 0) }}
-                <span class="text-dimmed">Web Invocations</span>
+                <span class="text-dimmed text-xs">Web Invocations</span>
             </li>
             <li>
                 {{ number_format($data['averageFunctionDuration'] ?? 0) }}ms
-                <span class="text-dimmed">Average Web Duration</span>
+                <span class="text-dimmed text-xs">Average Web Duration</span>
             </li>
             <li>
                 {{ number_format($data['totalCliFunctionInvocations'] ?? 0) }}
-                <span class="text-dimmed">CLI Invocations</span>
+                <span class="text-dimmed text-xs">CLI Invocations</span>
             </li>
             <li>
                 {{ number_format($data['averageCliFunctionDuration'] ?? 0) }}ms
-                <span class="text-dimmed">Average CLI Duration</span>
+                <span class="text-dimmed text-xs">Average CLI Duration</span>
             </li>
             <li>
                 {{ number_format($data['totalQueueFunctionInvocations'] ?? 0) }}
-                <span class="text-dimmed">Queue Invocations</span>
+                <span class="text-dimmed text-xs">Queue Invocations</span>
             </li>
             <li>
                 {{ number_format($data['averageQueueFunctionDuration'] ?? 0) }}ms
-                <span class="text-dimmed">Average Queue Duration</span>
+                <span class="text-dimmed text-xs">Average Queue Duration</span>
             </li>
         </ul>
     </div>
