@@ -18,16 +18,13 @@
                     @endif
                     <ul class="self-center space-y-1 text-sm {{$displayNodeClass}}">
                         <li>
-                            {{ number_format($data['averageCacheCpuUtilization'][$node] ?? 0).'%' }}
-                            <span class="text-dimmed text-xs">Average CPU Utilization</span>
+                            {{ number_format($data['averageCacheCpuUtilization'][$node] ?? 0) }}% <span class="text-dimmed text-xs">Average CPU Utilization</span>
                         </li>
                         <li>
-                            {{ number_format($data['totalCacheHits'][$node] ?? 0) }}
-                            <span class="text-dimmed text-xs">Cache Hits</span>
+                            {{ number_format($data['totalCacheHits'][$node] ?? 0) }} <span class="text-dimmed text-xs">Cache Hits</span>
                         </li>
                         <li>
-                            {{ number_format($data['totalCacheMisses'][$node] ?? 0) }}
-                            <span class="text-dimmed text-xs">Cache Misses</span>
+                            {{ number_format($data['totalCacheMisses'][$node] ?? 0) }} <span class="text-dimmed text-xs">Cache Misses</span>
                         </li>
                     </ul>
                 </li>

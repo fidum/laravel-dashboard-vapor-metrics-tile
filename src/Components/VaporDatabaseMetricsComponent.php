@@ -13,7 +13,7 @@ class VaporDatabaseMetricsComponent extends Component
 
     public string $tileName;
 
-    public function mount(string $position, string $tileName)
+    public function mount(string $position = '', string $tileName = '')
     {
         $this->position = $position;
         $this->tileName = $tileName;
