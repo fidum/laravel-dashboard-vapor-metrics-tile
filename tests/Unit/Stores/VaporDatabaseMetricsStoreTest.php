@@ -2,10 +2,8 @@
 
 namespace Fidum\VaporMetricsTile\Tests\Unit\Stores;
 
-use Fidum\VaporMetricsTile\Stores\VaporCacheMetricsStore;
 use Fidum\VaporMetricsTile\Stores\VaporDatabaseMetricsStore;
 use Fidum\VaporMetricsTile\Tests\TestCase;
-use Spatie\Dashboard\Models\Tile;
 
 class VaporDatabaseMetricsStoreTest extends TestCase
 {
