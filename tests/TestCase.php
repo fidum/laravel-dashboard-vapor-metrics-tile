@@ -2,8 +2,6 @@
 namespace Fidum\VaporMetricsTile\Tests;
 
 use Fidum\VaporMetricsTile\VaporMetricsTileServiceProvider;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Support\Facades\Artisan;
 use Livewire\LivewireServiceProvider;
 use NunoMaduro\LaravelMojito\MojitoServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;

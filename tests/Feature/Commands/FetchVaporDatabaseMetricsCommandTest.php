@@ -2,7 +2,6 @@
 
 namespace Fidum\VaporMetricsTile\Tests\Feature\Commands;
 
-use Fidum\VaporMetricsTile\Stores\VaporCacheMetricsStore;
 use Fidum\VaporMetricsTile\Stores\VaporDatabaseMetricsStore;
 use Fidum\VaporMetricsTile\Tests\TestCase;
 use Fidum\VaporMetricsTile\VaporMetricsClient;
