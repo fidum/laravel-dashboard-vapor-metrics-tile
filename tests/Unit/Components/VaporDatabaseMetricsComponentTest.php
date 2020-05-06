@@ -6,7 +6,6 @@ use Fidum\VaporMetricsTile\Components\VaporDatabaseMetricsComponent;
 use Fidum\VaporMetricsTile\Stores\VaporDatabaseMetricsStore;
 use Fidum\VaporMetricsTile\Tests\TestCase;
 use Fidum\VaporMetricsTile\VaporMetricsClient;
-use Illuminate\View\View;
 use Livewire\Livewire;
 use Livewire\Testing\Concerns\MakesAssertions;
 use Livewire\Testing\TestableLivewire;
