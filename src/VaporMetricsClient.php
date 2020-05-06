@@ -7,7 +7,9 @@ use Laravel\VaporCli\Helpers;
 
 class VaporMetricsClient extends ConsoleVaporClient
 {
-    const DEFAULT_PERIOD = '1d';
+    public const DEFAULT_PERIOD = '1d';
+
+    public const DEFAULT_REFRESH_SECONDS = 300;
 
     public static function make(?string $secret = null): self
     {
