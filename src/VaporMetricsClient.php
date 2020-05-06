@@ -2,7 +2,6 @@
 
 namespace Fidum\VaporMetricsTile;
 
-use GuzzleHttp\Exception\ClientException;
 use Laravel\VaporCli\ConsoleVaporClient;
 use Laravel\VaporCli\Helpers;
 
@@ -47,6 +46,6 @@ class VaporMetricsClient extends ConsoleVaporClient
 
     private function rawRequest(string $method, string $uri, array $json = []): array
     {
-        return rescue(fn() => $this->requestWithoutErrorHandling($method, $uri, $json) ?? [], []);
+        return rescue(fn () => $this->requestWithoutErrorHandling($method, $uri, $json) ?? [], []);
     }
 }

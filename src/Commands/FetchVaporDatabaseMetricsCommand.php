@@ -6,7 +6,6 @@ use Fidum\VaporMetricsTile\Stores\VaporDatabaseMetricsStore;
 use Fidum\VaporMetricsTile\VaporMetricsClient;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 
 class FetchVaporDatabaseMetricsCommand extends Command
 {
