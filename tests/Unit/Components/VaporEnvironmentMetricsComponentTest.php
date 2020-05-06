@@ -73,9 +73,6 @@ class VaporEnvironmentMetricsComponentTest extends TestCase
             ->assertViewHas('period', VaporMetricsClient::DEFAULT_PERIOD)
             ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
 
-        $this->assertStringNotContainsString('Node 1', $html);
-        $this->assertStringNotContainsString('Node 2', $html);
-
         (new ViewAssertion($this->stripOutInitialData($html)))
             ->contains('79 <span class="text-dimmed text-xs">API Gateway Requests</span>')
             ->contains('1,239,321 <span class="text-dimmed text-xs">Web Invocations</span>')
