@@ -16,19 +16,16 @@ class FetchVaporEnvironmentMetricsCommand extends Command
 
     public function handle()
     {
-        $configuredProjects = config('dashboard.tiles.vapor_metrics.environments');
+        $configs = config('dashboard.tiles.vapor_metrics.environments');
 
-        $environments = new Collection($configuredProjects);
+        collect($configs)->each(function (array $config, string $name) {
+            $id = $config['project_id'];
+            $env = Arr::get($config, 'environment', 'production');
+            $period = Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD);
+            $secret = Arr::get($config, 'secret');
 
-        $environments->each(function (array $config, string $name) {
+            $data = VaporMetricsClient::make($secret)->environmentMetricsRaw($id, $env, $period);
             $key = VaporEnvironmentMetricsStore::key($name);
-            $token = Arr::get($config, 'secret');
-
-            $data = VaporMetricsClient::make($token)->environmentMetricsRaw(
-                $config['project_id'],
-                Arr::get($config, 'environment', 'production'),
-                Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD),
-            );
 
             VaporEnvironmentMetricsStore::make()->setMetrics($key, $data);
         });

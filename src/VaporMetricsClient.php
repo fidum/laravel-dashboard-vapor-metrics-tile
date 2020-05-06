@@ -10,41 +10,43 @@ class VaporMetricsClient extends ConsoleVaporClient
 {
     const DEFAULT_PERIOD = '1d';
 
-    public static function make(?string $token = null): self
+    public static function make(?string $secret = null): self
     {
-        $token ??= config('dashboard.tiles.vapor_metrics.secret');
+        $secret ??= config('dashboard.tiles.vapor_metrics.secret');
 
-        if ($token) {
-            Helpers::config(['token' => $token]);
+        if ($secret) {
+            Helpers::config(['token' => $secret]);
         }
 
         return new static();
     }
 
-    /** @throws ClientException */
     public function environmentMetricsRaw(int $projectId, string $environment, string $period): array
     {
-        return $this->requestWithoutErrorHandling(
+        return $this->rawRequest(
             'get',
             sprintf("/api/projects/%s/environments/%s/metrics?period=%s", $projectId, $environment, $period)
         );
     }
 
-    /** @throws ClientException */
     public function cacheMetricsRaw(int $cacheId, string $period): array
     {
-        return $this->requestWithErrorHandling(
+        return $this->rawRequest(
             'get',
             sprintf("/api/caches/%s/metrics?period=%s", $cacheId, $period)
         );
     }
 
-    /** @throws ClientException */
     public function databaseMetricsRaw(int $databaseId, string $period): array
     {
-        return $this->requestWithoutErrorHandling(
+        return $this->rawRequest(
             'get',
             sprintf("/api/databases/%s/metrics?period=%s", $databaseId, $period),
         );
+    }
+
+    private function rawRequest(string $method, string $uri, array $json = []): array
+    {
+        return rescue(fn() => $this->requestWithoutErrorHandling($method, $uri, $json) ?? [], []);
     }
 }

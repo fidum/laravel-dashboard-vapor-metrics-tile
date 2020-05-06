@@ -16,20 +16,16 @@ class FetchVaporDatabaseMetricsCommand extends Command
 
     public function handle()
     {
-        $configuredProjects = config('dashboard.tiles.vapor_metrics.databases');
+        $configs = config('dashboard.tiles.vapor_metrics.databases');
 
-        $databases = new Collection($configuredProjects);
+        collect($configs)->each(function (array $config) {
+            $id = $config['database_id'];
+            $period = Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD);
+            $secret = Arr::get($config, 'secret');
 
-        $databases->each(function (array $config, $name) {
-            $key = $config['database_id'];
-            $token = Arr::get($config, 'secret');
+            $data = VaporMetricsClient::make($secret)->databaseMetricsRaw($id, $period);
 
-            $data = VaporMetricsClient::make($token)->databaseMetricsRaw(
-                $key,
-                Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD),
-            );
-
-            VaporDatabaseMetricsStore::make()->setMetrics($key, $data);
+            VaporDatabaseMetricsStore::make()->setMetrics($id, $data);
         });
     }
 }

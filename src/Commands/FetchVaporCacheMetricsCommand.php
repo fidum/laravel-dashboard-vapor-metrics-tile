@@ -6,7 +6,6 @@ use Fidum\VaporMetricsTile\Stores\VaporCacheMetricsStore;
 use Fidum\VaporMetricsTile\VaporMetricsClient;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 
 class FetchVaporCacheMetricsCommand extends Command
 {
@@ -16,20 +15,16 @@ class FetchVaporCacheMetricsCommand extends Command
 
     public function handle()
     {
-        $configuredProjects = config('dashboard.tiles.vapor_metrics.caches');
+        $configs = config('dashboard.tiles.vapor_metrics.caches');
 
-        $caches = new Collection($configuredProjects);
+        collect($configs)->each(function (array $config, $name) {
+            $id = $config['cache_id'];
+            $period = Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD);
+            $secret = Arr::get($config, 'secret');
 
-        $caches->each(function (array $config, $name) {
-            $key = $config['cache_id'];
-            $token = Arr::get($config, 'secret');
+            $data = VaporMetricsClient::make($secret)->cacheMetricsRaw($id, $period);
 
-            $data = VaporMetricsClient::make($token)->cacheMetricsRaw(
-                $key,
-                Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD),
-            );
-
-            VaporCacheMetricsStore::make()->setMetrics($key, $data);
+            VaporCacheMetricsStore::make()->setMetrics($id, $data);
         });
     }
 }
