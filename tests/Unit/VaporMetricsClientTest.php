@@ -4,7 +4,6 @@ namespace Fidum\VaporMetricsTile\Tests\Unit;
 
 use Fidum\VaporMetricsTile\Tests\TestCase;
 use Fidum\VaporMetricsTile\VaporMetricsClient;
-use GuzzleHttp\Client;
 use Laravel\VaporCli\Helpers;
 
 class VaporMetricsClientTest extends TestCase
