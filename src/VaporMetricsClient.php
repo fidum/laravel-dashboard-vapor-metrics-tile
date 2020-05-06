@@ -19,7 +19,7 @@ class VaporMetricsClient extends ConsoleVaporClient
             Helpers::config(['token' => $secret]);
         }
 
-        return new static();
+        return app(static::class);
     }
 
     public function environmentMetricsRaw(int $projectId, string $environment, string $period): array
