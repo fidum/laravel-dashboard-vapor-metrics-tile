@@ -3,8 +3,6 @@
 namespace Fidum\VaporMetricsTile\Components;
 
 use Fidum\VaporMetricsTile\Stores\VaporDatabaseMetricsStore;
-use Fidum\VaporMetricsTile\VaporMetricsClient;
-use Illuminate\Support\Arr;
 use Livewire\Component;
 
 class VaporDatabaseMetricsComponent extends Component

@@ -4,7 +4,7 @@ namespace Fidum\VaporMetricsTile\Components;
 
 use Fidum\VaporMetricsTile\VaporMetricsClient;
 
-trait  VaporMetricsComponentTrait
+trait VaporMetricsComponentTrait
 {
     private function refreshIntervalInSeconds(array $tileConfig): int
     {
