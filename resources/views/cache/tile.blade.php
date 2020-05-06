@@ -1,3 +1,7 @@
+@php
+    $nodeCount = count($data['totalCacheHits'] ?? [[]]);
+    $displayNodeClass = $nodeCount > 1 ? 'pl-2' : null;
+@endphp
 <x-dashboard-tile
     :position="$position"
     :refresh-interval="$refreshIntervalInSeconds"
@@ -7,10 +11,12 @@
             <h1 class="text-xl leading-none -mt-1">{{$tileName}}</h1>
         </div>
         <ul class="self-center divide-y-2">
-            @foreach(range(0, count($data['totalCacheHits'] ?? [[]]) - 1) as $node)
+            @foreach(range(0, $nodeCount - 1) as $node)
                 <li class="py-1 truncate">
-                    <h3 class="text-md">Node {{ $node + 1 }}</h3>
-                    <ul class="self-center space-y-1 text-sm pl-2">
+                    @if($displayNodeClass)
+                        <h3 class="text-md">Node {{ $node + 1 }}</h3>
+                    @endif
+                    <ul class="self-center space-y-1 text-sm {{$displayNodeClass}}">
                         <li> {{ number_format($data['averageCacheCpuUtilization'][$node] ?? 0).'%' }} <span class="text-dimmed">Average CPU Utilization</span></li>
                         <li> {{ number_format($data['totalCacheHits'][$node] ?? 0) }} <span class="text-dimmed">Cache Hits</span></li>
                         <li> {{ number_format($data['totalCacheMisses'][$node] ?? 0) }} <span class="text-dimmed">Cache Misses</span></li>
