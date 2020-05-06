@@ -6,6 +6,8 @@
 
 This tile can be used on [the Laravel Dashboard](https://docs.spatie.be/laravel-dashboard).
 
+![Preview](docs/preview.png)
+
 ## Installation
 
 You can install the package via composer:
@@ -20,27 +22,27 @@ In your dashboard view you can use one or all or multiple of each of these compo
 
 ```html
 <x-dashboard>
-    <livewire:vapor-environment-metrics-tile tileName="Production" position="a1:a3" />
-    <livewire:vapor-cache-metrics-tile tileName="Cache" position="a4:a5" />
-    <livewire:vapor-database-metrics-tile tileName="Database" position="a6:a7" />
+    <livewire:vapor-environment-metrics-tile tileName="My Production Website" position="a1:a3" />
+    <livewire:vapor-cache-metrics-tile tileName="My Cache Instance" position="a4:a5" />
+    <livewire:vapor-database-metrics-tile tileName="My Database" position="a6:a7" />
 </x-dashboard>
 ```
 
 See below for example tiles config that should go in the `config/dashboard.php` file. The `tileName` attribute value above should match the keys in the configs below:
 
-```php
+```php*
 'tiles' => [
     'vapor_metrics' => [
         'secret' => env('VAPOR_API_TOKEN'),
-        'databases' => [
-            'Database' => ['database_id' => 569],
-        ],
         'caches' => [
-            'Cache' => ['cache_id' => 110],
+            'My Cache Instance' => ['cache_id' => 222],
+        ],
+        'databases' => [
+            'My Database' => ['database_id' => 555],
         ],
         'environments' => [
-            'My Website' => ['project_id' => 1350],
-            'Preview' => ['project_id' => 1350, 'environment' => 'staging'],
+            'My Production Website' => ['project_id' => 1111],
+            'My Staging Website' => ['project_id' => 1111, 'environment' => 'staging'],
         ],
     ],
 ],
