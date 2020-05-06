@@ -2,6 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/fidum/laravel-dashboard-vapor-metrics-tile.svg?style=flat-square)](https://packagist.org/packages/fidum/laravel-dashboard-vapor-metrics-tile)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/fidum/laravel-dashboard-vapor-metrics-tile/run-tests?label=tests)](https://github.com/fidum/laravel-dashboard-vapor-metrics-tile/actions?query=workflow%3Arun-tests+branch%3Amaster)
+[![codecov](https://codecov.io/gh/fidum/laravel-dashboard-vapor-metrics-tile/branch/master/graph/badge.svg)](https://codecov.io/gh/fidum/laravel-dashboard-vapor-metrics-tile)
 [![Total Downloads](https://img.shields.io/packagist/dt/fidum/laravel-dashboard-vapor-metrics-tile.svg?style=flat-square)](https://packagist.org/packages/fidum/laravel-dashboard-vapor-metrics-tile)
 [![Twitter Follow](https://img.shields.io/twitter/follow/danmasonmp.svg?style=social)](https://twitter.com/danmasonmp)  
 
