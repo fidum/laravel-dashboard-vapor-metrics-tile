@@ -7,6 +7,7 @@
 /.travis.yml        export-ignore
 /phpunit.xml.dist   export-ignore
 /tests              export-ignore
+/docs               export-ignore
 /.editorconfig      export-ignore
 /.php.cs            export-ignore
 /.github            export-ignore
