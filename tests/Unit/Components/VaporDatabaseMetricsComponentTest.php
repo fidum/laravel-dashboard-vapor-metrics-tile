@@ -7,14 +7,11 @@ use Fidum\VaporMetricsTile\Stores\VaporDatabaseMetricsStore;
 use Fidum\VaporMetricsTile\Tests\TestCase;
 use Fidum\VaporMetricsTile\VaporMetricsClient;
 use Livewire\Livewire;
-use Livewire\Testing\Concerns\MakesAssertions;
 use Livewire\Testing\TestableLivewire;
 use NunoMaduro\LaravelMojito\ViewAssertion;
 
 class VaporDatabaseMetricsComponentTest extends TestCase
 {
-    use MakesAssertions;
-
     public function testMount()
     {
         $component = new VaporDatabaseMetricsComponent('');
@@ -38,7 +35,7 @@ class VaporDatabaseMetricsComponentTest extends TestCase
             ->assertViewHas('period', '7d')
             ->assertViewHas('refreshIntervalInSeconds', 60);
 
-        (new ViewAssertion($this->stripOutInitialData($html)))
+        (new ViewAssertion($html))
             ->contains('0% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
             ->contains('0 <span class="text-dimmed text-xs">Average Database Connections</span>')
             ->contains('0 <span class="text-dimmed text-xs">Max Database Connections</span>')
@@ -65,7 +62,7 @@ class VaporDatabaseMetricsComponentTest extends TestCase
             ->assertViewHas('period', VaporMetricsClient::DEFAULT_PERIOD)
             ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
 
-        (new ViewAssertion($this->stripOutInitialData($html)))
+        (new ViewAssertion($html))
             ->contains('43% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
             ->contains('1,123 <span class="text-dimmed text-xs">Average Database Connections</span>')
             ->contains('13,243 <span class="text-dimmed text-xs">Max Database Connections</span>')

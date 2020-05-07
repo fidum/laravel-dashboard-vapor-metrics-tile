@@ -7,14 +7,11 @@ use Fidum\VaporMetricsTile\Stores\VaporEnvironmentMetricsStore;
 use Fidum\VaporMetricsTile\Tests\TestCase;
 use Fidum\VaporMetricsTile\VaporMetricsClient;
 use Livewire\Livewire;
-use Livewire\Testing\Concerns\MakesAssertions;
 use Livewire\Testing\TestableLivewire;
 use NunoMaduro\LaravelMojito\ViewAssertion;
 
 class VaporEnvironmentMetricsComponentTest extends TestCase
 {
-    use MakesAssertions;
-
     public function testMount()
     {
         $component = new VaporEnvironmentMetricsComponent('');
@@ -38,7 +35,7 @@ class VaporEnvironmentMetricsComponentTest extends TestCase
             ->assertViewHas('period', '7d')
             ->assertViewHas('refreshIntervalInSeconds', 60);
 
-        (new ViewAssertion($this->stripOutInitialData($html)))
+        (new ViewAssertion($html))
             ->contains('0 <span class="text-dimmed text-xs">API Gateway Requests</span>')
             ->contains('0 <span class="text-dimmed text-xs">Web Invocations</span>')
             ->contains('0ms <span class="text-dimmed text-xs">Average Web Duration</span>')
@@ -73,7 +70,7 @@ class VaporEnvironmentMetricsComponentTest extends TestCase
             ->assertViewHas('period', VaporMetricsClient::DEFAULT_PERIOD)
             ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
 
-        (new ViewAssertion($this->stripOutInitialData($html)))
+        (new ViewAssertion($html))
             ->contains('79 <span class="text-dimmed text-xs">API Gateway Requests</span>')
             ->contains('1,239,321 <span class="text-dimmed text-xs">Web Invocations</span>')
             ->contains('433ms <span class="text-dimmed text-xs">Average Web Duration</span>')

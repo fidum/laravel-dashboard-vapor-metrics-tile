@@ -7,14 +7,11 @@ use Fidum\VaporMetricsTile\Stores\VaporCacheMetricsStore;
 use Fidum\VaporMetricsTile\Tests\TestCase;
 use Fidum\VaporMetricsTile\VaporMetricsClient;
 use Livewire\Livewire;
-use Livewire\Testing\Concerns\MakesAssertions;
 use Livewire\Testing\TestableLivewire;
 use NunoMaduro\LaravelMojito\ViewAssertion;
 
 class VaporCacheMetricsComponentTest extends TestCase
 {
-    use MakesAssertions;
-
     public function testMount()
     {
         $component = new VaporCacheMetricsComponent('');
@@ -41,7 +38,7 @@ class VaporCacheMetricsComponentTest extends TestCase
         $this->assertStringNotContainsString('Node 1', $html);
         $this->assertStringNotContainsString('Node 2', $html);
 
-        (new ViewAssertion($this->stripOutInitialData($html)))
+        (new ViewAssertion($html))
             ->contains('0% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
             ->contains('0 <span class="text-dimmed text-xs">Cache Hits</span>')
             ->contains('0 <span class="text-dimmed text-xs">Cache Misses</span>')
@@ -71,7 +68,7 @@ class VaporCacheMetricsComponentTest extends TestCase
         $this->assertStringNotContainsString('Node 1', $html);
         $this->assertStringNotContainsString('Node 2', $html);
 
-        (new ViewAssertion($this->stripOutInitialData($html)))
+        (new ViewAssertion($html))
             ->contains('43% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
             ->contains('1,123 <span class="text-dimmed text-xs">Cache Hits</span>')
             ->contains('13,243 <span class="text-dimmed text-xs">Cache Misses</span>')
@@ -96,7 +93,7 @@ class VaporCacheMetricsComponentTest extends TestCase
             ->assertViewHas('period', VaporMetricsClient::DEFAULT_PERIOD)
             ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
 
-        $assert = new ViewAssertion($this->stripOutInitialData($result->payload['dom']));
+        $assert = new ViewAssertion($result->payload['dom']);
 
         $assert->contains('Node 1')
             ->contains('43% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
