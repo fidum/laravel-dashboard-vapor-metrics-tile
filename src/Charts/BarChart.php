@@ -3,7 +3,6 @@
 namespace Fidum\VaporMetricsTile\Charts;
 
 use ConsoleTVs\Charts\Classes\Chartjs\Chart;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class BarChart extends Chart
