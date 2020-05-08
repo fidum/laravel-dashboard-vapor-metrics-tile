@@ -21,7 +21,9 @@ trait VaporMetricsStoreTrait
     public function setMetrics(string $key, array $data): self
     {
         $this->tile->putData("metrics:$key", $data);
-
+        if ($this->tile->wasChanged()) {
+            echo 'changed';
+        }
         return $this;
     }
 

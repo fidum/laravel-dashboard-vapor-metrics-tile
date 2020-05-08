@@ -17,30 +17,33 @@ class VaporEnvironmentMetricsChartComponent extends Component
 
     public string $tileName;
 
-    public string $title;
-
     public string $type;
+
+    public string $wireId;
 
     public function mount(
         string $position = '',
         string $tileName = '',
         string $type = null,
-        string $height = '100%'
+        string $height = '100%',
+        string $wireId = null
     ) {
         $this->height = $height;
         $this->position = $position;
         $this->tileName = $tileName;
-        $this->title = $title ?? $tileName ?? 'Metrics';
         $this->type = $type ?? ChartType::DEFAULT;
+        $this->wireId = $wireId ?? $this->id;
     }
 
     public function render()
     {
-        $this->emit('polledEvent' . $this->id);
-        $config = config('dashboard.tiles.vapor_metrics.environments.' . $this->tileName) ?? [];
+        return view('dashboard-vapor-metrics-tiles::environment.chart', $this->viewData());
+    }
+
+    protected function chart(string $period): BarChart
+    {
         $key = VaporEnvironmentMetricsStore::key($this->tileName);
         $metrics = VaporEnvironmentMetricsStore::make()->metrics($key);
-        $period = $this->period($config);
         $field = ChartType::field($this->type);
 
         $data = collect($metrics[$field] ?? []);
@@ -49,7 +52,7 @@ class VaporEnvironmentMetricsChartComponent extends Component
             'y' => number_format($metric, 0, '.', ''),
         ])->values();
 
-        $chart = new BarChart($this->id, $period);
+        $chart = new BarChart($this->wireId, $period);
 
         $chart
             ->height($this->height)
@@ -58,11 +61,19 @@ class VaporEnvironmentMetricsChartComponent extends Component
             ->dataset(ChartType::label($this->tileName, $this->type), 'bar', $dataset)
             ->backgroundColor('#848584');
 
-        return view('dashboard-vapor-metrics-tiles::environment.chart', [
-            'wireId' => $this->id,
-            'chart' => $chart,
-            'period' => $this->period($config),
+        return $chart;
+    }
+
+    protected function viewData(): array
+    {
+        $config = config('dashboard.tiles.vapor_metrics.environments.' . $this->tileName) ?? [];
+        $period = $this->period($config);
+
+        return [
+            'wireId' => $this->wireId,
+            'chart' => $this->chart($period),
+            'period' => $period,
             'refreshIntervalInSeconds' => $this->refreshIntervalInSeconds($config),
-        ]);
+        ];
     }
 }

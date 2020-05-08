@@ -8,6 +8,7 @@ use Fidum\VaporMetricsTile\Commands\FetchVaporEnvironmentMetricsCommand;
 use Fidum\VaporMetricsTile\Components\VaporCacheMetricsComponent;
 use Fidum\VaporMetricsTile\Components\VaporDatabaseMetricsComponent;
 use Fidum\VaporMetricsTile\Components\VaporEnvironmentMetricsChartComponent;
+use Fidum\VaporMetricsTile\Components\VaporEnvironmentMetricsChartRefreshComponent;
 use Fidum\VaporMetricsTile\Components\VaporEnvironmentMetricsComponent;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
@@ -19,6 +20,7 @@ class VaporMetricsTileServiceProvider extends ServiceProvider
     {
         Livewire::component('vapor-environment-metrics-tile', VaporEnvironmentMetricsComponent::class);
         Livewire::component('vapor-environment-metrics-chart-tile', VaporEnvironmentMetricsChartComponent::class);
+        Livewire::component('vapor-environment-metrics-chart-refresh', VaporEnvironmentMetricsChartRefreshComponent::class);
         Livewire::component('vapor-cache-metrics-tile', VaporCacheMetricsComponent::class);
         Livewire::component('vapor-database-metrics-tile', VaporDatabaseMetricsComponent::class);
 

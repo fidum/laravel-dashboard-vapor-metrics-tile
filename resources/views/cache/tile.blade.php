@@ -16,7 +16,7 @@
                     @if($displayNodeClass)
                         <h3 class="text-md">Node {{ $node + 1 }}</h3>
                     @endif
-                    <ul class="self-center divide-y-2 text-sm {{$displayNodeClass}}">
+                    <ul class="self-center text-sm {{$displayNodeClass}}">
                         <li>
                             {{ number_format($data['averageCacheCpuUtilization'][$node] ?? 0) }}% <span class="text-dimmed text-xs">Average CPU Utilization</span>
                         </li>
