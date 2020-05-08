@@ -24,6 +24,7 @@ trait VaporMetricsStoreTrait
         if ($this->tile->wasChanged()) {
             echo 'changed';
         }
+
         return $this;
     }
 
