@@ -15,7 +15,7 @@ class VaporEnvironmentMetricsChartRefreshComponent extends VaporEnvironmentMetri
     {
         $chart = parent::chart($period);
 
-        $this->emit('polledEvent' . $this->wireId, [
+        $this->emit('chartDataRefreshed' . $this->wireId, [
             'labels' => $chart->labels,
             'datasets' => $chart->formatDatasets(),
             'options' => $chart->options,
