@@ -9,7 +9,7 @@ trait VaporMetricsComponentTrait
     private function refreshIntervalInSeconds(array $tileConfig): int
     {
         return $tileConfig['refresh_interval_in_seconds']
-            ?? config('dashboard.tiles.vapor_metrics.period')
+            ?? config('dashboard.tiles.vapor_metrics.refresh_interval_in_seconds')
             ?? VaporMetricsClient::DEFAULT_REFRESH_SECONDS;
     }
 

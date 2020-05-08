@@ -19,10 +19,11 @@
     ],
     "require": {
         "php": "^7.4",
-        "spatie/laravel-dashboard": "^1.0",
-        "laravel/vapor-cli": "^1.0",
+        "consoletvs/charts": "^6.5",
+        "illuminate/console": "^7.0",
         "illuminate/support": "^7.0",
-        "illuminate/console": "^7.0"
+        "laravel/vapor-cli": "^1.0",
+        "spatie/laravel-dashboard": ">=1.1"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.0",
