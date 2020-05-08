@@ -3,6 +3,7 @@
 namespace Fidum\VaporMetricsTile\Charts;
 
 use ConsoleTVs\Charts\Classes\Chartjs\Chart;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
 class BarChart extends Chart
@@ -38,6 +39,7 @@ class BarChart extends Chart
                         'unit' => $this->unit($period),
                         'round' => true,
                         'displayFormats' => [
+                            'second' => 'hh:mm:ss',
                             'minute' => 'hh:mm a',
                             'hour' => 'hh:mm a',
                             'day' => 'MMM D',
@@ -59,20 +61,18 @@ class BarChart extends Chart
     public function unit(string $period): string
     {
         $periodString = Str::of($period);
+
         $oneUnit = $periodString->startsWith('1');
 
-        if ($periodString->endsWith('m')) {
-            return 'minute';
-        }
+        $availableUnits = [
+            'm' => $oneUnit ? 'second' : 'minute',
+            'h' => $oneUnit ? 'minute' : 'hour',
+            'd' => $oneUnit ? 'hour' : 'day',
+            'M' => $oneUnit ? 'day' : 'week',
+        ];
 
-        if ($periodString->endsWith('M')) {
-            return $oneUnit ? 'day' : 'week';
-        }
+        $unit = (string) $periodString->substr(-1);
 
-        if ($periodString->endsWith('d') && ! $oneUnit) {
-            return 'day';
-        }
-
-        return 'hour';
+        return $availableUnits[$unit] ?? 'hour';
     }
 }
