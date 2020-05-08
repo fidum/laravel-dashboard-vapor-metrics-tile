@@ -4,7 +4,7 @@
 @endphp
 <x-dashboard-tile
     :position="$position"
-    refresh-interval="{{$refreshIntervalInSeconds}}"
+    :refresh-interval="$refreshIntervalInSeconds"
 >
     <div class="grid grid-rows-auto-1 gap-2 h-full">
         <div class="flex items-center justify-center">
