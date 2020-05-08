@@ -1,6 +1,4 @@
-@php
-/** @var \Fidum\VaporMetricsTile\Charts\BarChart $chart */
-@endphp
+@php /** @var \Fidum\VaporMetricsTile\Charts\BarChart $chart */ @endphp
 <div class="hidden" wire:poll.{{$refreshIntervalInSeconds}}s></div>
 @push('scripts')
     <script>
