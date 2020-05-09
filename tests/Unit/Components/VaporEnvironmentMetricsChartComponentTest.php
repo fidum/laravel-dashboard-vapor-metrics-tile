@@ -37,8 +37,7 @@ class VaporEnvironmentMetricsChartComponentTest extends TestCase
 
         $html = $result->payload['dom'];
 
-        $result->assertDontSee('Average HTTP Request Duration (ms)')
-            ->assertViewHas('period', '7d')
+        $result->assertViewHas('period', '7d')
             ->assertViewHas('refreshIntervalInSeconds', 60)
             ->assertViewHas('wireId', 'abc')
             ->assertViewHas('height', '100%')

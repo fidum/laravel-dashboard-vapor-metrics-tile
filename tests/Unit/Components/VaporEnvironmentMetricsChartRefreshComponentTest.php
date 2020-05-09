@@ -38,7 +38,7 @@ class VaporEnvironmentMetricsChartRefreshComponentTest extends TestCase
         $html = $result->payload['dom'];
         $wireId = $result->payload['id'];
 
-        $result->assertDontSee('Average HTTP Request Duration (ms)')
+        $result->assertEmitted('chartDataRefreshedabc')
             ->assertViewHas('period', '7d')
             ->assertViewHas('refreshIntervalInSeconds', 60)
             ->assertViewHas('wireId', 'abc')
@@ -75,13 +75,12 @@ class VaporEnvironmentMetricsChartRefreshComponentTest extends TestCase
         $html = $result->payload['dom'];
         $wireId = $result->payload['id'];
 
-        $result->assertViewHas('period', '1d')
+        $result->assertEmitted('chartDataRefreshed' . $wireId)
+            ->assertViewHas('period', '1d')
             ->assertViewHas('refreshIntervalInSeconds', 300)
             ->assertViewHas('wireId', $wireId)
             ->assertViewHas('height', '100%')
         ;
-
-        $result->assertEmitted('chartDataRefreshed' . $wireId);
 
         (new ViewAssertion($html))
             ->contains('<div wire:id="'.$wireId.'" class="hidden" wire:poll.300s></div>');

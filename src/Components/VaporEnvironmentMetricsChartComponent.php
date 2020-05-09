@@ -45,8 +45,8 @@ class VaporEnvironmentMetricsChartComponent extends Component
         $key = VaporEnvironmentMetricsStore::key($this->tileName);
         $metrics = VaporEnvironmentMetricsStore::make()->metrics($key);
         $field = ChartType::field($this->type);
-
         $data = collect($metrics[$field] ?? []);
+
         $dataset = $data->map(fn ($metric, $date) => [
             'x' => $date,
             'y' => number_format($metric, 0, '.', ''),
