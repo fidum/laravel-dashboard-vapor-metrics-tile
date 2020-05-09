@@ -6,7 +6,7 @@
         <div class="flex items-center justify-center">
             <h1 class="text-xl leading-none -mt-1">{{$tileName}}</h1>
         </div>
-        <ul class="self-center divide-y-2">
+        <ul class="self-center">
             <li>
                 {{ number_format($data['averageDatabaseCpuUtilization'] ?? 0) }}% <span class="text-dimmed text-xs">Average CPU Utilization</span>
             </li>
