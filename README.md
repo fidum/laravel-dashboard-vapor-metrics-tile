@@ -5,7 +5,7 @@
 [![Codecov](https://img.shields.io/codecov/c/github/fidum/laravel-dashboard-vapor-metrics-tile?logo=codecov&logoColor=white&style=for-the-badge)](https://codecov.io/gh/fidum/laravel-dashboard-vapor-metrics-tile)
 [![Twitter Follow](https://img.shields.io/twitter/follow/danmasonmp?label=Follow&logo=twitter&style=for-the-badge)](https://twitter.com/danmasonmp)  
 
-Displays metrics for **all** of your laravel vapor projects - caches, databases and environment metrics included! 
+Displays metrics for **all** of your laravel vapor projects - caches, databases and environment metrics and charts included! 
 
 ![Preview](docs/preview.png)
 
@@ -85,8 +85,25 @@ attributes are **required**. The `tileName` attribute value needs to match the n
     <livewire:vapor-environment-metrics-tile tileName="My Production Website" position="a1:a3" />
     <livewire:vapor-cache-metrics-tile tileName="My Cache Instance" position="a4:a5" />
     <livewire:vapor-database-metrics-tile tileName="My Database" position="a6:a7" />
+    <livewire:vapor-environment-metrics-chart-tile tileName="My Production Website" type="http-requests-avg-duration" position="a5:a6" />
+    <livewire:vapor-environment-metrics-chart-tile tileName="My Production Website" type="cli-avg-duration" position="a7:a8" />
+    <livewire:vapor-environment-metrics-chart-tile tileName="My Production Website" type="queue-avg-duration" position="a9:a10" />
+    <livewire:vapor-environment-metrics-chart-tile tileName="My Production Website" type="http-requests-total" position="b5:b6" />
+    <livewire:vapor-environment-metrics-chart-tile tileName="My Production Website" type="cli-invocations-total" position="b7:b8" />
+    <livewire:vapor-environment-metrics-chart-tile tileName="My Production Website" type="queue-invocations-total" position="b9:b10" />
 </x-dashboard>
 ```
+
+For charts an additional `type` value should be provided to select which chart to show:
+
+- `cli-avg-duration`: Average CLI Invocation Duration (ms)
+- `cli-invocations-total`: CLI Invocations
+- `http-requests-avg-duration`: Average HTTP Request Duration (ms) 
+- `http-requests-total`: HTTP Requests
+- `queue-avg-duration`: Average Queue Invocation Duration (ms)
+- `queue-invocations-total`: Queue Invocations
+
+
 ## Testing
 ```bash
 composer test
