@@ -2,6 +2,11 @@
 
 All notable changes to `fidum/laravel-dashboard-vapor-metrics-tile` will be documented in this file
 
+## 1.1.0 - 2020-04-07
+
+**Added**
+- Added charts tiles!
+
 ## 1.0.1 - 2020-04-07
 
 **Fixed**
