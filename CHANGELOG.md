@@ -5,7 +5,7 @@ All notable changes to `fidum/laravel-dashboard-vapor-metrics-tile` will be docu
 ## 1.2.0 - 2020-04-15
 
 **Changed**
-- Changed charts to use [fidum/laravel-dashboard-chart-tile](https://github.com/fidum/laravel-dashboard-chart-tile) (#2)
+- Changed charts to use [fidum/laravel-dashboard-chart-tile](https://github.com/fidum/laravel-dashboard-chart-tile) ([#2](https://github.com/fidum/laravel-dashboard-vapor-metrics-tile/pull/2))
 
 ## 1.1.0 - 2020-04-09
 
