@@ -80,7 +80,7 @@ protected function schedule(Schedule $schedule)
 In your dashboard view you can use one or all or multiple of each of these components. The `tileName` and `position` 
 attributes are **required**. The `tileName` attribute value needs to match the name specified in the config:
 
-```html
+```blade
 <x-dashboard>
     <livewire:vapor-environment-metrics-tile tileName="My Production Website" position="a1:a3" />
     <livewire:vapor-cache-metrics-tile tileName="My Cache Instance" position="a4:a5" />
