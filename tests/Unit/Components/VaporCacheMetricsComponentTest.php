@@ -32,7 +32,6 @@ class VaporCacheMetricsComponentTest extends TestCase
         $html = $result->payload['dom'];
 
         $result->assertSee('My Cache Changed')
-            ->assertViewHas('period', '7d')
             ->assertViewHas('refreshIntervalInSeconds', 60);
 
         $this->assertStringNotContainsString('Node 1', $html);
@@ -62,7 +61,6 @@ class VaporCacheMetricsComponentTest extends TestCase
         $html = $result->payload['dom'];
 
         $result->assertSee('My Cache Defaults')
-            ->assertViewHas('period', VaporMetricsClient::DEFAULT_PERIOD)
             ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
 
         $this->assertStringNotContainsString('Node 1', $html);
@@ -90,7 +88,6 @@ class VaporCacheMetricsComponentTest extends TestCase
             ->call('render');
 
         $result->assertSee('My Cache Defaults')
-            ->assertViewHas('period', VaporMetricsClient::DEFAULT_PERIOD)
             ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
 
         $assert = new ViewAssertion($result->payload['dom']);

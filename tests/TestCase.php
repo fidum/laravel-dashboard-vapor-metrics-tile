@@ -2,6 +2,7 @@
 namespace Fidum\VaporMetricsTile\Tests;
 
 use ConsoleTVs\Charts\ChartsServiceProvider;
+use Fidum\ChartTile\ChartTileServiceProvider;
 use Fidum\VaporMetricsTile\VaporMetricsTileServiceProvider;
 use Livewire\LivewireServiceProvider;
 use NunoMaduro\LaravelMojito\MojitoServiceProvider;
@@ -67,6 +68,7 @@ class TestCase extends BaseTestCase
     {
         return [
             ChartsServiceProvider::class,
+            ChartTileServiceProvider::class,
             DashboardServiceProvider::class,
             LivewireServiceProvider::class,
             MojitoServiceProvider::class,

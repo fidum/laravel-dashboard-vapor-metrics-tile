@@ -9,6 +9,8 @@ use Illuminate\Support\Arr;
 
 class FetchVaporCacheMetricsCommand extends Command
 {
+    use VaporMetricsCommandTrait;
+
     protected $signature = 'dashboard:fetch-data-for-vapor-cache-metrics';
 
     protected $description = 'Fetch data for vapor cache metrics';
@@ -19,7 +21,7 @@ class FetchVaporCacheMetricsCommand extends Command
 
         collect($configs)->each(function (array $config) {
             $id = $config['cache_id'];
-            $period = Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD);
+            $period = $this->period($config);
             $secret = Arr::get($config, 'secret');
 
             $data = VaporMetricsClient::make($secret)->cacheMetricsRaw($id, $period);

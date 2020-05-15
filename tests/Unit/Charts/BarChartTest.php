@@ -2,44 +2,76 @@
 
 namespace Fidum\VaporMetricsTile\Tests\Unit\Charts;
 
+use Carbon\Carbon;
 use Fidum\VaporMetricsTile\Charts\BarChart;
+use Fidum\VaporMetricsTile\Stores\VaporEnvironmentMetricsStore;
 use Fidum\VaporMetricsTile\Tests\TestCase;
-use Illuminate\Support\Str;
+use Illuminate\Support\Collection;
 
 class BarChartTest extends TestCase
 {
-    public function testConstruct()
+    public function testChartEmptyData()
     {
-        $id = Str::random();
-        $chart = new BarChart($id, '7d');
+        $factory = BarChart::make([]);
+        $chart = $factory->chart();
 
-        $this->assertSame('bar_'.$id, $chart->id);
+        $this->assertSame([], $chart->labels);
+        $this->assertSame($this->expectedOptions('hour'), $chart->options);
+        $this->assertSame([], $chart->datasets[0]->values);
+    }
+
+    public function testChartDefaults()
+    {
+        $data = $this->data();
+
+        VaporEnvironmentMetricsStore::make()->setMetrics('my_env_defaults', [
+            'averageFunctionDurationByInterval' => $data->toArray(),
+        ]);
+
+        $factory = BarChart::make([]);
+        $chart = $factory->chart();
+
+        $this->assertSame($data->keys()->toArray(), $chart->labels);
+        $this->assertSame($this->expectedOptions('hour'), $chart->options);
+
+        $this->assertSame(
+            $data->map(fn ($y, $x) => compact('x', 'y'))->values()->toArray(),
+            $chart->datasets[0]->values,
+        );
+    }
+
+    public function testChartWithSettings()
+    {
+        $data = $this->data();
+
+        VaporEnvironmentMetricsStore::make()->setMetrics('my_env_changed', [
+            'totalCliFunctionInvocationsByInterval' => $data->toArray(),
+        ]);
+
+        $factory = BarChart::make(['tileName' => 'My Env Changed', 'type' => 'cli-invocations-total']);
+        $chart = $factory->chart();
+
+        $this->assertSame($data->keys()->toArray(), $chart->labels);
         $this->assertSame($this->expectedOptions('day'), $chart->options);
+
+        $this->assertSame(
+            $data->map(fn ($y, $x) => compact('x', 'y'))->values()->toArray(),
+            $chart->datasets[0]->values,
+        );
     }
 
-    public function testHeight()
-    {
-        $chart = new BarChart('', '7d');
-
-        $this->assertSame(400, $chart->height);
-
-        $chart->height(600);
-        $this->assertSame(600, $chart->height);
-
-        $chart->height('100vh');
-        $this->assertSame('100vh', $chart->height);
-    }
-
-    /** @dataProvider provider */
+    /** @dataProvider unitProvider */
     public function testUnit(string $period, string $expectedUnit)
     {
-        $chart = new BarChart('', $period);
+        config()->set('dashboard.tiles.vapor_metrics.period', $period);
+
+        $factory = BarChart::make([]);
+        $chart = $factory->chart();
 
         $this->assertSame($this->expectedOptions($expectedUnit), $chart->options);
-        $this->assertSame($expectedUnit, $chart->unit($period));
     }
 
-    public function provider(): array
+    public function unitProvider(): array
     {
         //1m, 5m, 30m, 1h, 8h, 1d (default), 3d, 7d, 1M
         return [
@@ -52,6 +84,20 @@ class BarChartTest extends TestCase
             ['1M', 'day'],
             ['2M', 'week'],
         ];
+    }
+
+    private function data(): Collection
+    {
+        $now = Carbon::now();
+
+        return collect([
+            $now->subHours(6)->toDateTimeString() => (string) rand(100, 200),
+            $now->subHours(5)->toDateTimeString() => (string) rand(100, 200),
+            $now->subHours(4)->toDateTimeString() => (string) rand(100, 200),
+            $now->subHours(3)->toDateTimeString() => (string) rand(100, 200),
+            $now->subHours(2)->toDateTimeString() => (string) rand(100, 200),
+            $now->subHours(1)->toDateTimeString() => (string) rand(100, 200),
+        ]);
     }
 
     private function expectedOptions(string $unit): array
