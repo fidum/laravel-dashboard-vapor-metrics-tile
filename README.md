@@ -103,6 +103,12 @@ For charts an additional `type` value should be provided to select which chart t
 - `queue-avg-duration`: Average Queue Invocation Duration (ms)
 - `queue-invocations-total`: Queue Invocations
 
+The charts use [fidum/laravel-dashboard-chart-tile](https://github.com/fidum/laravel-dashboard-chart-tile) internally. 
+You can use the below additional properties for further customisation:
+ 
+- `height` sets the height of the chart, depending on your dashboard layout you may need to adjust this (defaults to `100%`).
+
+- `refreshIntervalInSeconds` use this to override the refresh rate of an individual tile (defaults to above configured setting) 
 
 ## Testing
 ```bash
