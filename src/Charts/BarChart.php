@@ -106,7 +106,7 @@ class BarChart implements ChartFactory
     {
         $periodString = Str::of($this->period());
 
-        $oneUnit = $periodString->startsWith('1');
+        $oneUnit = filter_var($periodString, FILTER_SANITIZE_NUMBER_INT) === '1';
 
         $availableUnits = [
             'm' => $oneUnit ? 'second' : 'minute',

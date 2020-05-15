@@ -76,13 +76,13 @@ class BarChartTest extends TestCase
         //1m, 5m, 30m, 1h, 8h, 1d (default), 3d, 7d, 1M
         return [
             ['1m', 'second'],
-            ['5m', 'minute'],
+            ['12m', 'minute'],
             ['1h', 'minute'],
-            ['8h', 'hour'],
+            ['12h', 'hour'],
             ['1d', 'hour'],
-            ['7d', 'day'],
+            ['12d', 'day'],
             ['1M', 'day'],
-            ['2M', 'week'],
+            ['12M', 'week'],
         ];
     }
 
