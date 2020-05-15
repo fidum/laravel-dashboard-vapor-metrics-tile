@@ -2,18 +2,61 @@
 
 namespace Fidum\VaporMetricsTile\Charts;
 
-use ConsoleTVs\Charts\Classes\Chartjs\Chart;
+use Fidum\ChartTile\Charts\Chart;
+use Fidum\ChartTile\Contracts\ChartFactory;
+use Fidum\VaporMetricsTile\Stores\VaporEnvironmentMetricsStore;
+use Fidum\VaporMetricsTile\VaporMetricsClient;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-class BarChart extends Chart
+class BarChart implements ChartFactory
 {
-    public function __construct(string $id, string $period)
+    private string $tileName;
+    private string $chartType;
+
+    public function __construct(string $tileName, string $chartType)
     {
-        parent::__construct();
+        $this->tileName = $tileName;
+        $this->chartType = $chartType;
+    }
 
-        $this->id = 'bar_' . $id;
+    public static function make(array $settings): ChartFactory
+    {
+        $defaultTile = Arr::get(array_keys(config('dashboard.tiles.vapor_metrics.environments', [])), 0, '');
 
-        $this->options([
+        return new static(
+            Arr::get($settings, 'tileName', $defaultTile),
+            Arr::get($settings, 'type', ChartType::DEFAULT)
+        );
+    }
+
+    public function chart(): Chart
+    {
+        $chart = new Chart();
+
+        $key = VaporEnvironmentMetricsStore::key($this->tileName);
+        $metrics = VaporEnvironmentMetricsStore::make()->metrics($key);
+        $field = ChartType::field($this->chartType);
+        $data = collect($metrics[$field] ?? []);
+
+        $dataset = $data->map(fn ($metric, $date) => [
+            'x' => $date,
+            'y' => number_format($metric, 0, '.', ''),
+        ])->values();
+
+        $chart
+            ->loader(false)
+            ->labels($data->keys())
+            ->options($this->options(), true)
+            ->dataset(ChartType::label($this->tileName, $this->chartType), 'bar', $dataset)
+            ->backgroundColor('#848584');
+
+        return $chart;
+    }
+
+    private function options(): array
+    {
+        return [
             'animation' => [
                 'duration' => 0,
             ],
@@ -35,7 +78,7 @@ class BarChart extends Chart
                         'maxRotation' => 0,
                     ],
                     'time' => [
-                        'unit' => $this->unit($period),
+                        'unit' => $this->unit(),
                         'round' => true,
                         'displayFormats' => [
                             'second' => 'hh:mm:ss',
@@ -47,19 +90,21 @@ class BarChart extends Chart
                     ],
                 ]],
             ],
-        ], true);
+        ];
     }
 
-    public function height($height): self
+    private function period(): string
     {
-        $this->height = $height;
+        $tileConfig = config('dashboard.tiles.vapor_metrics.environments.' . $this->tileName) ?? [];
 
-        return $this;
+        return $tileConfig['period']
+            ?? config('dashboard.tiles.vapor_metrics.period')
+            ?? VaporMetricsClient::DEFAULT_PERIOD;
     }
 
-    public function unit(string $period): string
+    private function unit(): string
     {
-        $periodString = Str::of($period);
+        $periodString = Str::of($this->period());
 
         $oneUnit = $periodString->startsWith('1');
 

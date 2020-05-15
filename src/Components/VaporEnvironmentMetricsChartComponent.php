@@ -2,9 +2,7 @@
 
 namespace Fidum\VaporMetricsTile\Components;
 
-use Fidum\VaporMetricsTile\Charts\BarChart;
 use Fidum\VaporMetricsTile\Charts\ChartType;
-use Fidum\VaporMetricsTile\Stores\VaporEnvironmentMetricsStore;
 use Livewire\Component;
 
 class VaporEnvironmentMetricsChartComponent extends Component
@@ -15,65 +13,30 @@ class VaporEnvironmentMetricsChartComponent extends Component
 
     public string $position;
 
+    public int $refreshIntervalInSeconds;
+
     public string $tileName;
 
     public string $type;
 
-    public string $wireId;
-
     public function mount(
         string $position = '',
-        string $tileName = '',
+        int $refreshIntervalInSeconds = null,
+        string $tileName = null,
         string $type = null,
-        string $height = '100%',
-        string $wireId = null
+        string $height = '100%'
     ) {
         $this->height = $height;
         $this->position = $position;
-        $this->tileName = $tileName;
-        $this->type = $type ?? ChartType::DEFAULT;
-        $this->wireId = $wireId ?? $this->id;
+        $this->tileName = $tileName ?? $this->tileName ?? '';
+        $this->type = $type ?? $this->type ?? ChartType::DEFAULT;
+
+        $config = config('dashboard.tiles.vapor_metrics.environments.' . $this->tileName) ?? [];
+        $this->refreshIntervalInSeconds = $refreshIntervalInSeconds ?? $this->refreshIntervalInSeconds($config);
     }
 
     public function render()
     {
-        return view('dashboard-vapor-metrics-tiles::environment.chart', $this->viewData());
-    }
-
-    protected function chart(string $period): BarChart
-    {
-        $key = VaporEnvironmentMetricsStore::key($this->tileName);
-        $metrics = VaporEnvironmentMetricsStore::make()->metrics($key);
-        $field = ChartType::field($this->type);
-        $data = collect($metrics[$field] ?? []);
-
-        $dataset = $data->map(fn ($metric, $date) => [
-            'x' => $date,
-            'y' => number_format($metric, 0, '.', ''),
-        ])->values();
-
-        $chart = new BarChart($this->wireId, $period);
-
-        $chart
-            ->height($this->height)
-            ->loader(false)
-            ->labels($data->keys())
-            ->dataset(ChartType::label($this->tileName, $this->type), 'bar', $dataset)
-            ->backgroundColor('#848584');
-
-        return $chart;
-    }
-
-    protected function viewData(): array
-    {
-        $config = config('dashboard.tiles.vapor_metrics.environments.' . $this->tileName) ?? [];
-        $period = $this->period($config);
-
-        return [
-            'wireId' => $this->wireId,
-            'chart' => $this->chart($period),
-            'period' => $period,
-            'refreshIntervalInSeconds' => $this->refreshIntervalInSeconds($config),
-        ];
+        return view('dashboard-vapor-metrics-tiles::environment.chart');
     }
 }
