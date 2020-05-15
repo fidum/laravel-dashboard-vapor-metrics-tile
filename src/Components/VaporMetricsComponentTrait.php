@@ -12,11 +12,4 @@ trait VaporMetricsComponentTrait
             ?? config('dashboard.tiles.vapor_metrics.refresh_interval_in_seconds')
             ?? VaporMetricsClient::DEFAULT_REFRESH_SECONDS;
     }
-
-    private function period(array $tileConfig): string
-    {
-        return $tileConfig['period']
-            ?? config('dashboard.tiles.vapor_metrics.period')
-            ?? VaporMetricsClient::DEFAULT_PERIOD;
-    }
 }

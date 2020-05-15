@@ -9,6 +9,8 @@ use Illuminate\Support\Arr;
 
 class FetchVaporEnvironmentMetricsCommand extends Command
 {
+    use VaporMetricsCommandTrait;
+
     protected $signature = 'dashboard:fetch-data-for-vapor-environment-metrics';
 
     protected $description = 'Fetch data for vapor environment metrics';
@@ -20,7 +22,7 @@ class FetchVaporEnvironmentMetricsCommand extends Command
         collect($configs)->each(function (array $config, string $name) {
             $id = $config['project_id'];
             $env = Arr::get($config, 'environment', 'production');
-            $period = Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD);
+            $period = $this->period($config);
             $secret = Arr::get($config, 'secret');
 
             $data = VaporMetricsClient::make($secret)->environmentMetricsRaw($id, $env, $period);

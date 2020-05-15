@@ -26,7 +26,6 @@ class VaporDatabaseMetricsComponent extends Component
 
         return view('dashboard-vapor-metrics-tiles::database.tile', [
             'data' => VaporDatabaseMetricsStore::make()->metrics($key),
-            'period' => $this->period($config),
             'refreshIntervalInSeconds' => $this->refreshIntervalInSeconds($config),
         ]);
     }

@@ -9,6 +9,8 @@ use Illuminate\Support\Arr;
 
 class FetchVaporDatabaseMetricsCommand extends Command
 {
+    use VaporMetricsCommandTrait;
+
     protected $signature = 'dashboard:fetch-data-for-vapor-database-metrics';
 
     protected $description = 'Fetch data for vapor database metrics';
@@ -19,7 +21,7 @@ class FetchVaporDatabaseMetricsCommand extends Command
 
         collect($configs)->each(function (array $config) {
             $id = $config['database_id'];
-            $period = Arr::get($config, 'period', VaporMetricsClient::DEFAULT_PERIOD);
+            $period = $this->period($config);
             $secret = Arr::get($config, 'secret');
 
             $data = VaporMetricsClient::make($secret)->databaseMetricsRaw($id, $period);

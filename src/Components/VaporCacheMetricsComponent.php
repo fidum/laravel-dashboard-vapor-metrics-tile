@@ -26,7 +26,6 @@ class VaporCacheMetricsComponent extends Component
 
         return view('dashboard-vapor-metrics-tiles::cache.tile', [
             'data' => VaporCacheMetricsStore::make()->metrics($key),
-            'period' => $this->period($config),
             'refreshIntervalInSeconds' => $this->refreshIntervalInSeconds($config),
         ]);
     }

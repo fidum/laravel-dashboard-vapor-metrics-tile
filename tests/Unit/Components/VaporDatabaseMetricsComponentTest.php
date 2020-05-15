@@ -32,7 +32,6 @@ class VaporDatabaseMetricsComponentTest extends TestCase
         $html = $result->payload['dom'];
 
         $result->assertSee('My DB Changed')
-            ->assertViewHas('period', '7d')
             ->assertViewHas('refreshIntervalInSeconds', 60);
 
         (new ViewAssertion($html))
@@ -59,7 +58,6 @@ class VaporDatabaseMetricsComponentTest extends TestCase
         $html = $result->payload['dom'];
 
         $result->assertSee('My DB Defaults')
-            ->assertViewHas('period', VaporMetricsClient::DEFAULT_PERIOD)
             ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
 
         (new ViewAssertion($html))

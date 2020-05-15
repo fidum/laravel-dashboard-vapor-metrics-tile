@@ -32,7 +32,6 @@ class VaporEnvironmentMetricsComponentTest extends TestCase
         $html = $result->payload['dom'];
 
         $result->assertSee('My Env Changed')
-            ->assertViewHas('period', '7d')
             ->assertViewHas('refreshIntervalInSeconds', 60);
 
         (new ViewAssertion($html))
@@ -67,7 +66,6 @@ class VaporEnvironmentMetricsComponentTest extends TestCase
         $html = $result->payload['dom'];
 
         $result->assertSee('My Env Defaults')
-            ->assertViewHas('period', VaporMetricsClient::DEFAULT_PERIOD)
             ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
 
         (new ViewAssertion($html))
