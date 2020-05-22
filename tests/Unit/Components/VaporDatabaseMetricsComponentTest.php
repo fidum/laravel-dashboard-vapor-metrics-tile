@@ -37,16 +37,15 @@ class VaporDatabaseMetricsComponentTest extends TestCase
         (new ViewAssertion($html))
             ->contains('0% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
             ->contains('0 <span class="text-dimmed text-xs">Average Database Connections</span>')
-            ->contains('0 <span class="text-dimmed text-xs">Max Database Connections</span>')
-        ;
+            ->contains('0 <span class="text-dimmed text-xs">Max Database Connections</span>');
     }
 
     public function testRenderSingleNode()
     {
         VaporDatabaseMetricsStore::make()->setMetrics(201, [
             'averageDatabaseCpuUtilization' => 42.99,
-            'averageDatabaseConnections' => 1123,
-            'maxDatabaseConnections' => 13243,
+            'averageDatabaseConnections'    => 1123,
+            'maxDatabaseConnections'        => 13243,
         ]);
 
         /** @var TestableLivewire $result */
@@ -63,7 +62,6 @@ class VaporDatabaseMetricsComponentTest extends TestCase
         (new ViewAssertion($html))
             ->contains('43% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
             ->contains('1,123 <span class="text-dimmed text-xs">Average Database Connections</span>')
-            ->contains('13,243 <span class="text-dimmed text-xs">Max Database Connections</span>')
-        ;
+            ->contains('13,243 <span class="text-dimmed text-xs">Max Database Connections</span>');
     }
 }

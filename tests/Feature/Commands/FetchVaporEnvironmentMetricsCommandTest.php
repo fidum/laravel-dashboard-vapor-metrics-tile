@@ -23,8 +23,8 @@ class FetchVaporEnvironmentMetricsCommandTest extends TestCase
         $this->assertSame(Tile::first()->only(['name', 'data']), [
             'name' => VaporEnvironmentMetricsStore::tileName(),
             'data' => [
-                "metrics:my_env_defaults" => $data,
-                "metrics:my_env_changed" => $data,
+                'metrics:my_env_defaults' => $data,
+                'metrics:my_env_changed'  => $data,
             ],
         ]);
     }

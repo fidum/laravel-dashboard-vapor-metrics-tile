@@ -21,11 +21,11 @@ class VaporDatabaseMetricsComponent extends Component
 
     public function render()
     {
-        $config = config('dashboard.tiles.vapor_metrics.databases.' . $this->tileName) ?? [];
+        $config = config('dashboard.tiles.vapor_metrics.databases.'.$this->tileName) ?? [];
         $key = $config['database_id'] ?? 0;
 
         return view('dashboard-vapor-metrics-tiles::database.tile', [
-            'data' => VaporDatabaseMetricsStore::make()->metrics($key),
+            'data'                     => VaporDatabaseMetricsStore::make()->metrics($key),
             'refreshIntervalInSeconds' => $this->refreshIntervalInSeconds($config),
         ]);
     }

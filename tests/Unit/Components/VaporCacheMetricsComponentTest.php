@@ -40,16 +40,15 @@ class VaporCacheMetricsComponentTest extends TestCase
         (new ViewAssertion($html))
             ->contains('0% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
             ->contains('0 <span class="text-dimmed text-xs">Cache Hits</span>')
-            ->contains('0 <span class="text-dimmed text-xs">Cache Misses</span>')
-        ;
+            ->contains('0 <span class="text-dimmed text-xs">Cache Misses</span>');
     }
 
     public function testRenderSingleNode()
     {
         VaporCacheMetricsStore::make()->setMetrics(101, [
             'averageCacheCpuUtilization' => [42.99],
-            'totalCacheHits' => [1123],
-            'totalCacheMisses' => [13243],
+            'totalCacheHits'             => [1123],
+            'totalCacheMisses'           => [13243],
         ]);
 
         /** @var TestableLivewire $result */
@@ -69,16 +68,15 @@ class VaporCacheMetricsComponentTest extends TestCase
         (new ViewAssertion($html))
             ->contains('43% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
             ->contains('1,123 <span class="text-dimmed text-xs">Cache Hits</span>')
-            ->contains('13,243 <span class="text-dimmed text-xs">Cache Misses</span>')
-        ;
+            ->contains('13,243 <span class="text-dimmed text-xs">Cache Misses</span>');
     }
 
     public function testRenderMultipleNodes()
     {
         VaporCacheMetricsStore::make()->setMetrics(101, [
             'averageCacheCpuUtilization' => [42.99, '75.49'],
-            'totalCacheHits' => [1123, 6678],
-            'totalCacheMisses' => [13243, 6654],
+            'totalCacheHits'             => [1123, 6678],
+            'totalCacheMisses'           => [13243, 6654],
         ]);
 
         /** @var TestableLivewire $result */
@@ -95,13 +93,11 @@ class VaporCacheMetricsComponentTest extends TestCase
         $assert->contains('Node 1')
             ->contains('43% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
             ->contains('1,123 <span class="text-dimmed text-xs">Cache Hits</span>')
-            ->contains('13,243 <span class="text-dimmed text-xs">Cache Misses</span>')
-        ;
+            ->contains('13,243 <span class="text-dimmed text-xs">Cache Misses</span>');
 
         $assert->contains('Node 2')
             ->contains('75% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
             ->contains('6,678 <span class="text-dimmed text-xs">Cache Hits</span>')
-            ->contains('6,654 <span class="text-dimmed text-xs">Cache Misses</span>')
-        ;
+            ->contains('6,654 <span class="text-dimmed text-xs">Cache Misses</span>');
     }
 }

@@ -35,7 +35,6 @@ class VaporEnvironmentMetricsChartComponentTest extends TestCase
             ->assertViewHas('tileName', 'My Env Changed')
             ->assertViewHas('type', ChartType::DEFAULT)
             ->assertViewHas('refreshIntervalInSeconds', 300)
-            ->assertViewHas('height', '100%')
-        ;
+            ->assertViewHas('height', '100%');
     }
 }

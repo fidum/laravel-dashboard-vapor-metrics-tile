@@ -24,7 +24,7 @@ class ChartTypeTest extends TestCase
         foreach (ChartType::TYPES as $type => $expected) {
             $this->assertSame($expected['field'], ChartType::field($type));
             $this->assertSame(
-                $expected['label'] . ' (Example Tile Name)',
+                $expected['label'].' (Example Tile Name)',
                 ChartType::label('Example Tile Name', $type)
             );
         }
