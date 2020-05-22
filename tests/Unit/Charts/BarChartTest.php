@@ -106,32 +106,32 @@ class BarChartTest extends TestCase
             'animation' => [
                 'duration' => 0,
             ],
-            'responsive' => true,
+            'responsive'          => true,
             'maintainAspectRatio' => false,
-            'legend' => [
+            'legend'              => [
                 'display' => true,
-                'labels' => [
+                'labels'  => [
                     'boxWidth' => 0,
                 ],
             ],
             'scales' => [
                 'xAxes' => [[
                     'display' => true,
-                    'offset' => true,
-                    'type' => 'time',
-                    'ticks' => [
-                        'source' => 'auto',
+                    'offset'  => true,
+                    'type'    => 'time',
+                    'ticks'   => [
+                        'source'      => 'auto',
                         'maxRotation' => 0,
                     ],
                     'time' => [
-                        'unit' => $unit,
-                        'round' => true,
+                        'unit'           => $unit,
+                        'round'          => true,
                         'displayFormats' => [
                             'second' => 'hh:mm:ss',
                             'minute' => 'hh:mm a',
-                            'hour' => 'hh:mm a',
-                            'day' => 'MMM D',
-                            'week' => 'MMM D',
+                            'hour'   => 'hh:mm a',
+                            'day'    => 'MMM D',
+                            'week'   => 'MMM D',
                         ],
                     ],
                 ]],

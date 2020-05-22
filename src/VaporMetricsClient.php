@@ -26,7 +26,7 @@ class VaporMetricsClient extends ConsoleVaporClient
     {
         return $this->rawRequest(
             'get',
-            sprintf("/api/projects/%s/environments/%s/metrics?period=%s", $projectId, $environment, $period)
+            sprintf('/api/projects/%s/environments/%s/metrics?period=%s', $projectId, $environment, $period)
         );
     }
 
@@ -34,7 +34,7 @@ class VaporMetricsClient extends ConsoleVaporClient
     {
         return $this->rawRequest(
             'get',
-            sprintf("/api/caches/%s/metrics?period=%s", $cacheId, $period)
+            sprintf('/api/caches/%s/metrics?period=%s', $cacheId, $period)
         );
     }
 
@@ -42,7 +42,7 @@ class VaporMetricsClient extends ConsoleVaporClient
     {
         return $this->rawRequest(
             'get',
-            sprintf("/api/databases/%s/metrics?period=%s", $databaseId, $period),
+            sprintf('/api/databases/%s/metrics?period=%s', $databaseId, $period),
         );
     }
 

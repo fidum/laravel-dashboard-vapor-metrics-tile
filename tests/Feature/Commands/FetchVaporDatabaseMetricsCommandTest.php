@@ -23,8 +23,8 @@ class FetchVaporDatabaseMetricsCommandTest extends TestCase
         $this->assertSame(Tile::first()->only(['name', 'data']), [
             'name' => VaporDatabaseMetricsStore::tileName(),
             'data' => [
-                "metrics:201" => $data,
-                "metrics:202" => $data,
+                'metrics:201' => $data,
+                'metrics:202' => $data,
             ],
         ]);
     }

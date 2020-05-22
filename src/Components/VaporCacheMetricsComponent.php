@@ -21,11 +21,11 @@ class VaporCacheMetricsComponent extends Component
 
     public function render()
     {
-        $config = config('dashboard.tiles.vapor_metrics.caches.' . $this->tileName) ?? [];
+        $config = config('dashboard.tiles.vapor_metrics.caches.'.$this->tileName) ?? [];
         $key = $config['cache_id'] ?? 0;
 
         return view('dashboard-vapor-metrics-tiles::cache.tile', [
-            'data' => VaporCacheMetricsStore::make()->metrics($key),
+            'data'                     => VaporCacheMetricsStore::make()->metrics($key),
             'refreshIntervalInSeconds' => $this->refreshIntervalInSeconds($config),
         ]);
     }

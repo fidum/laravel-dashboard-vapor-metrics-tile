@@ -31,7 +31,7 @@ class VaporEnvironmentMetricsChartComponent extends Component
         $this->tileName = $tileName ?? $this->tileName ?? '';
         $this->type = $type ?? $this->type ?? ChartType::DEFAULT;
 
-        $config = config('dashboard.tiles.vapor_metrics.environments.' . $this->tileName) ?? [];
+        $config = config('dashboard.tiles.vapor_metrics.environments.'.$this->tileName) ?? [];
         $this->refreshIntervalInSeconds = $refreshIntervalInSeconds ?? $this->refreshIntervalInSeconds($config);
     }
 

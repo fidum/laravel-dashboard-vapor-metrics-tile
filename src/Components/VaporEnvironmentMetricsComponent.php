@@ -21,11 +21,11 @@ class VaporEnvironmentMetricsComponent extends Component
 
     public function render()
     {
-        $config = config('dashboard.tiles.vapor_metrics.environments.' . $this->tileName) ?? [];
+        $config = config('dashboard.tiles.vapor_metrics.environments.'.$this->tileName) ?? [];
         $key = VaporEnvironmentMetricsStore::key($this->tileName);
 
         return view('dashboard-vapor-metrics-tiles::environment.tile', [
-            'data' => VaporEnvironmentMetricsStore::make()->metrics($key),
+            'data'                     => VaporEnvironmentMetricsStore::make()->metrics($key),
             'refreshIntervalInSeconds' => $this->refreshIntervalInSeconds($config),
         ]);
     }

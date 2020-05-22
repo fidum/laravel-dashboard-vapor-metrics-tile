@@ -41,20 +41,19 @@ class VaporEnvironmentMetricsComponentTest extends TestCase
             ->contains('0 <span class="text-dimmed text-xs">CLI Invocations</span>')
             ->contains('0ms <span class="text-dimmed text-xs">Average CLI Duration</span>')
             ->contains('0 <span class="text-dimmed text-xs">Queue Invocations</span>')
-            ->contains('0ms <span class="text-dimmed text-xs">Average Queue Duration</span>')
-        ;
+            ->contains('0ms <span class="text-dimmed text-xs">Average Queue Duration</span>');
     }
 
     public function testRenderSingleNode()
     {
         VaporEnvironmentMetricsStore::make()->setMetrics('my_env_defaults', [
-            'totalRestApiRequests' => 79.49,
-            'totalFunctionInvocations' => 1239320.5,
-            'averageFunctionDuration' => 432.51,
-            'totalCliFunctionInvocations' => 72136,
-            'averageCliFunctionDuration' => 234,
+            'totalRestApiRequests'          => 79.49,
+            'totalFunctionInvocations'      => 1239320.5,
+            'averageFunctionDuration'       => 432.51,
+            'totalCliFunctionInvocations'   => 72136,
+            'averageCliFunctionDuration'    => 234,
             'totalQueueFunctionInvocations' => 971239,
-            'averageQueueFunctionDuration' => 88292.23,
+            'averageQueueFunctionDuration'  => 88292.23,
         ]);
 
         /** @var TestableLivewire $result */
@@ -75,7 +74,6 @@ class VaporEnvironmentMetricsComponentTest extends TestCase
             ->contains('72,136 <span class="text-dimmed text-xs">CLI Invocations</span>')
             ->contains('234ms <span class="text-dimmed text-xs">Average CLI Duration</span>')
             ->contains('971,239 <span class="text-dimmed text-xs">Queue Invocations</span>')
-            ->contains('88,292ms <span class="text-dimmed text-xs">Average Queue Duration</span>')
-        ;
+            ->contains('88,292ms <span class="text-dimmed text-xs">Average Queue Duration</span>');
     }
 }
