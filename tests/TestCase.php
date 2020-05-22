@@ -27,39 +27,39 @@ class TestCase extends BaseTestCase
     {
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => '',
+            'prefix' => '',
         ]);
 
         $app['config']->set('dashboard.tiles.vapor_metrics', [
             'secret' => 'default-secret',
             'caches' => [
                 'My Cache Defaults' => ['cache_id' => 101],
-                'My Cache Changed'  => [
-                    'cache_id'                    => 102,
-                    'period'                      => '7d', // optional: 1m, 5m, 30m, 1h, 8h, 1d (default), 3d, 7d, 1M
+                'My Cache Changed' => [
+                    'cache_id' => 102,
+                    'period' => '7d', // optional: 1m, 5m, 30m, 1h, 8h, 1d (default), 3d, 7d, 1M
                     'refresh_interval_in_seconds' => 60, // optional: override individual tile
-                    'secret'                      => 'cache-secret', // :optional: override individual tile
+                    'secret' => 'cache-secret', // :optional: override individual tile
                 ],
             ],
             'databases' => [
                 'My DB Defaults' => ['database_id' => 201],
-                'My DB Changed'  => [
-                    'database_id'                 => 202,
-                    'period'                      => '7d',
+                'My DB Changed' => [
+                    'database_id' => 202,
+                    'period' => '7d',
                     'refresh_interval_in_seconds' => 60,
-                    'secret'                      => 'db-secret',
+                    'secret' => 'db-secret',
                 ],
             ],
             'environments' => [
                 'My Env Defaults' => ['project_id' => 301],
-                'My Env Changed'  => [
-                    'project_id'                  => 302,
-                    'environment'                 => 'staging',
-                    'period'                      => '7d',
+                'My Env Changed' => [
+                    'project_id' => 302,
+                    'environment' => 'staging',
+                    'period' => '7d',
                     'refresh_interval_in_seconds' => 60,
-                    'secret'                      => 'env-secret',
+                    'secret' => 'env-secret',
                 ],
             ],
         ]);

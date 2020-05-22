@@ -47,13 +47,13 @@ class VaporEnvironmentMetricsComponentTest extends TestCase
     public function testRenderSingleNode()
     {
         VaporEnvironmentMetricsStore::make()->setMetrics('my_env_defaults', [
-            'totalRestApiRequests'          => 79.49,
-            'totalFunctionInvocations'      => 1239320.5,
-            'averageFunctionDuration'       => 432.51,
-            'totalCliFunctionInvocations'   => 72136,
-            'averageCliFunctionDuration'    => 234,
+            'totalRestApiRequests' => 79.49,
+            'totalFunctionInvocations' => 1239320.5,
+            'averageFunctionDuration' => 432.51,
+            'totalCliFunctionInvocations' => 72136,
+            'averageCliFunctionDuration' => 234,
             'totalQueueFunctionInvocations' => 971239,
-            'averageQueueFunctionDuration'  => 88292.23,
+            'averageQueueFunctionDuration' => 88292.23,
         ]);
 
         /** @var TestableLivewire $result */

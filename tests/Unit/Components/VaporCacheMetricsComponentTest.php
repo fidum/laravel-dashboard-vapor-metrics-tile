@@ -47,8 +47,8 @@ class VaporCacheMetricsComponentTest extends TestCase
     {
         VaporCacheMetricsStore::make()->setMetrics(101, [
             'averageCacheCpuUtilization' => [42.99],
-            'totalCacheHits'             => [1123],
-            'totalCacheMisses'           => [13243],
+            'totalCacheHits' => [1123],
+            'totalCacheMisses' => [13243],
         ]);
 
         /** @var TestableLivewire $result */
@@ -75,8 +75,8 @@ class VaporCacheMetricsComponentTest extends TestCase
     {
         VaporCacheMetricsStore::make()->setMetrics(101, [
             'averageCacheCpuUtilization' => [42.99, '75.49'],
-            'totalCacheHits'             => [1123, 6678],
-            'totalCacheMisses'           => [13243, 6654],
+            'totalCacheHits' => [1123, 6678],
+            'totalCacheMisses' => [13243, 6654],
         ]);
 
         /** @var TestableLivewire $result */

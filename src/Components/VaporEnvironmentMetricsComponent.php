@@ -25,7 +25,7 @@ class VaporEnvironmentMetricsComponent extends Component
         $key = VaporEnvironmentMetricsStore::key($this->tileName);
 
         return view('dashboard-vapor-metrics-tiles::environment.tile', [
-            'data'                     => VaporEnvironmentMetricsStore::make()->metrics($key),
+            'data' => VaporEnvironmentMetricsStore::make()->metrics($key),
             'refreshIntervalInSeconds' => $this->refreshIntervalInSeconds($config),
         ]);
     }

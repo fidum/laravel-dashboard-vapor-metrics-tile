@@ -24,7 +24,7 @@ class FetchVaporEnvironmentMetricsCommandTest extends TestCase
             'name' => VaporEnvironmentMetricsStore::tileName(),
             'data' => [
                 'metrics:my_env_defaults' => $data,
-                'metrics:my_env_changed'  => $data,
+                'metrics:my_env_changed' => $data,
             ],
         ]);
     }

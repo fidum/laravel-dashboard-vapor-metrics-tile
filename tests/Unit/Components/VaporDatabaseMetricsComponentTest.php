@@ -44,8 +44,8 @@ class VaporDatabaseMetricsComponentTest extends TestCase
     {
         VaporDatabaseMetricsStore::make()->setMetrics(201, [
             'averageDatabaseCpuUtilization' => 42.99,
-            'averageDatabaseConnections'    => 1123,
-            'maxDatabaseConnections'        => 13243,
+            'averageDatabaseConnections' => 1123,
+            'maxDatabaseConnections' => 13243,
         ]);
 
         /** @var TestableLivewire $result */
