@@ -22,7 +22,6 @@ In the `dashboard` config file, you must add this configuration in the `tiles` k
 `caches`, `databases` and `environments`.
 
 ```php
-<?php
 // in config/dashboard.php
 return [
     // ...
@@ -67,7 +66,6 @@ return [
 In `app\Console\Kernel.php` you should schedule the below to run every `x` minutes. Only add the commands where you have configured the related tiles above. 
 
 ```php
-<?php
 // in app/console/Kernel.php
 protected function schedule(Schedule $schedule)
 {
