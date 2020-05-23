@@ -83,12 +83,12 @@ attributes are **required**. The `tileName` attribute value needs to match the n
     <livewire:vapor-environment-metrics-tile tileName="My Production Website" position="a1:a4" />
     <livewire:vapor-cache-metrics-tile tileName="My Cache Instance" position="b1:a2" />
     <livewire:vapor-database-metrics-tile tileName="My Database" position="b3:b4" />
-    <livewire:vapor-environment-metrics-chart-tile tileName="My Production Website" type="http-requests-avg-duration" position="a5:a6" />
-    <livewire:vapor-environment-metrics-chart-tile tileName="My Production Website" type="cli-avg-duration" position="a7:a8" />
-    <livewire:vapor-environment-metrics-chart-tile tileName="My Production Website" type="queue-avg-duration" position="a9:a10" />
-    <livewire:vapor-environment-metrics-chart-tile tileName="My Production Website" type="http-requests-total" position="b5:b6" />
-    <livewire:vapor-environment-metrics-chart-tile tileName="My Production Website" type="cli-invocations-total" position="b7:b8" />
-    <livewire:vapor-environment-metrics-chart-tile tileName="My Production Website" type="queue-invocations-total" position="b9:b10" />
+    <livewire:vapor-environment-metrics-chart-tile type="http-requests-avg-duration" tileName="My Production Website" position="a5:a6" />
+    <livewire:vapor-environment-metrics-chart-tile type="cli-avg-duration" tileName="My Production Website" position="a7:a8" />
+    <livewire:vapor-environment-metrics-chart-tile type="queue-avg-duration" tileName="My Production Website" position="a9:a10" />
+    <livewire:vapor-environment-metrics-chart-tile type="http-requests-total" tileName="My Production Website" position="b5:b6" />
+    <livewire:vapor-environment-metrics-chart-tile type="cli-invocations-total" tileName="My Production Website" position="b7:b8" />
+    <livewire:vapor-environment-metrics-chart-tile type="queue-invocations-total" tileName="My Production Website" position="b9:b10" />
 </x-dashboard>
 ```
 
