@@ -16,6 +16,7 @@ class VaporMetricsClient extends ConsoleVaporClient
         $secret ??= config('dashboard.tiles.vapor_metrics.secret');
 
         if ($secret) {
+            /** @psalm-suppress InvalidArgument */
             Helpers::config(['token' => $secret]);
         }
 

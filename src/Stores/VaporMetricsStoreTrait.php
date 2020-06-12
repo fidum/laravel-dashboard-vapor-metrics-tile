@@ -18,14 +18,16 @@ trait VaporMetricsStoreTrait
         $this->tile = Tile::firstOrCreateForName(static::tileName());
     }
 
-    public function setMetrics(string $key, array $data): self
+    /** @param string|int $key */
+    public function setMetrics($key, array $data): self
     {
         $this->tile->putData("metrics:$key", $data);
 
         return $this;
     }
 
-    public function metrics(string $key): array
+    /** @param string|int $key */
+    public function metrics($key): array
     {
         return $this->tile->getData("metrics:$key") ?? [];
     }

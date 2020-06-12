@@ -15,9 +15,9 @@ class VaporEnvironmentMetricsChartComponent extends Component
 
     public int $refreshIntervalInSeconds;
 
-    public string $tileName;
+    public ?string $tileName;
 
-    public string $type;
+    public ?string $type;
 
     public function mount(
         string $position = '',
