@@ -34,7 +34,6 @@ class BarChart extends Chart
             ->dataset(ChartType::label($tileName, $type), $dataset->toArray());
     }
 
-
     public function type(): string
     {
         return 'bar';
@@ -112,6 +111,7 @@ class BarChart extends Chart
     private function getTileName(Request $request): string
     {
         $defaultTile = Arr::get(array_keys(config('dashboard.tiles.vapor_metrics.environments', [])), 0, '');
+
         return $request->get('tileName') ?: $defaultTile;
     }
 }
