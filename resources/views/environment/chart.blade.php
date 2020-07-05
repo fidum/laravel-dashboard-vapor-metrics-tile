@@ -1,6 +1,6 @@
 @livewire('chart-tile', [
-    'chartFactory' => \Fidum\VaporMetricsTile\Charts\BarChart::class,
-    'chartSettings' => compact('tileName', 'type'),
+    'chartClass' => \Fidum\VaporMetricsTile\Charts\BarChart::class,
+    'chartFilters' => compact('tileName', 'type'),
     'height' => $height,
     'position' => $position,
     'refreshIntervalInSeconds' => $refreshIntervalInSeconds

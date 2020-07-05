@@ -2,6 +2,8 @@
 
 namespace Fidum\VaporMetricsTile;
 
+use ConsoleTVs\Charts\Registrar;
+use Fidum\VaporMetricsTile\Charts\BarChart;
 use Fidum\VaporMetricsTile\Commands\FetchVaporCacheMetricsCommand;
 use Fidum\VaporMetricsTile\Commands\FetchVaporDatabaseMetricsCommand;
 use Fidum\VaporMetricsTile\Commands\FetchVaporEnvironmentMetricsCommand;
@@ -16,6 +18,10 @@ class VaporMetricsTileServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        app(Registrar::class)->register([
+            BarChart::class
+        ]);
+
         Livewire::component('vapor-environment-metrics-tile', VaporEnvironmentMetricsComponent::class);
         Livewire::component('vapor-environment-metrics-chart-tile', VaporEnvironmentMetricsChartComponent::class);
         Livewire::component('vapor-cache-metrics-tile', VaporCacheMetricsComponent::class);
