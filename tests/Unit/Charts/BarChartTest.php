@@ -7,17 +7,19 @@ use Fidum\VaporMetricsTile\Charts\BarChart;
 use Fidum\VaporMetricsTile\Stores\VaporEnvironmentMetricsStore;
 use Fidum\VaporMetricsTile\Tests\TestCase;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Request;
 
 class BarChartTest extends TestCase
 {
     public function testChartEmptyData()
     {
-        $factory = BarChart::make([]);
-        $chart = $factory->chart();
+        $chart = app(BarChart::class);
+        $chartisan = $chart->handler(Request::merge([]));
+        $object = $chartisan->toObject();
 
-        $this->assertSame([], $chart->labels);
-        $this->assertSame($this->expectedOptions('hour'), $chart->options);
-        $this->assertSame([], $chart->datasets[0]->values);
+        $this->assertSame([], $object->chart->labels);
+        $this->assertSame($this->expectedOptions('hour'), $chart->options());
+        $this->assertSame([], $object->datasets[0]->values);
     }
 
     public function testChartDefaults()
@@ -28,15 +30,16 @@ class BarChartTest extends TestCase
             'averageFunctionDurationByInterval' => $data->toArray(),
         ]);
 
-        $factory = BarChart::make([]);
-        $chart = $factory->chart();
+        $chart = app(BarChart::class);
+        $chartisan = $chart->handler(Request::merge([]));
+        $object = $chartisan->toObject();
 
-        $this->assertSame($data->keys()->toArray(), $chart->labels);
-        $this->assertSame($this->expectedOptions('hour'), $chart->options);
+        $this->assertSame($data->keys()->toArray(), $object->chart->labels);
+        $this->assertSame($this->expectedOptions('hour'), $chart->options());
 
         $this->assertSame(
             $data->map(fn ($y, $x) => compact('x', 'y'))->values()->toArray(),
-            $chart->datasets[0]->values,
+            $object->datasets[0]->values,
         );
     }
 
@@ -48,15 +51,16 @@ class BarChartTest extends TestCase
             'totalCliFunctionInvocationsByInterval' => $data->toArray(),
         ]);
 
-        $factory = BarChart::make(['tileName' => 'My Env Changed', 'type' => 'cli-invocations-total']);
-        $chart = $factory->chart();
+        $chart = app(BarChart::class);
+        $chartisan = $chart->handler(Request::merge(['tileName' => 'My Env Changed', 'type' => 'cli-invocations-total']));
+        $object = $chartisan->toObject();
 
-        $this->assertSame($data->keys()->toArray(), $chart->labels);
-        $this->assertSame($this->expectedOptions('day'), $chart->options);
+        $this->assertSame($data->keys()->toArray(), $object->chart->labels);
+        $this->assertSame($this->expectedOptions('day'), $chart->options());
 
         $this->assertSame(
             $data->map(fn ($y, $x) => compact('x', 'y'))->values()->toArray(),
-            $chart->datasets[0]->values,
+            $object->datasets[0]->values,
         );
     }
 
@@ -65,10 +69,9 @@ class BarChartTest extends TestCase
     {
         config()->set('dashboard.tiles.vapor_metrics.period', $period);
 
-        $factory = BarChart::make([]);
-        $chart = $factory->chart();
+        $chart = app(BarChart::class);
 
-        $this->assertSame($this->expectedOptions($expectedUnit), $chart->options);
+        $this->assertSame($this->expectedOptions($expectedUnit), $chart->options());
     }
 
     public function unitProvider(): array
@@ -103,9 +106,6 @@ class BarChartTest extends TestCase
     private function expectedOptions(string $unit): array
     {
         return [
-            'animation' => [
-                'duration' => 0,
-            ],
             'responsive' => true,
             'maintainAspectRatio' => false,
             'legend' => [
