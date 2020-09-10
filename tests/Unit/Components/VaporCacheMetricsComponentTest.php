@@ -29,7 +29,7 @@ class VaporCacheMetricsComponentTest extends TestCase
             ->set('tileName', 'My Cache Changed')
             ->call('render');
 
-        $html = $result->payload['dom'];
+        $html = $result->lastRenderedDom;
 
         $result->assertSee('My Cache Changed')
             ->assertViewHas('refreshIntervalInSeconds', 60);
@@ -57,7 +57,7 @@ class VaporCacheMetricsComponentTest extends TestCase
             ->set('tileName', 'My Cache Defaults')
             ->call('render');
 
-        $html = $result->payload['dom'];
+        $html = $result->lastRenderedDom;
 
         $result->assertSee('My Cache Defaults')
             ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
@@ -88,7 +88,7 @@ class VaporCacheMetricsComponentTest extends TestCase
         $result->assertSee('My Cache Defaults')
             ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
 
-        $assert = new ViewAssertion($result->payload['dom']);
+        $assert = new ViewAssertion($result->lastRenderedDom);
 
         $assert->contains('Node 1')
             ->contains('43% <span class="text-dimmed text-xs">Average CPU Utilization</span>')

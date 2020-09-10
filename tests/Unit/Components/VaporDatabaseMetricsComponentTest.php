@@ -29,7 +29,7 @@ class VaporDatabaseMetricsComponentTest extends TestCase
             ->set('tileName', 'My DB Changed')
             ->call('render');
 
-        $html = $result->payload['dom'];
+        $html = $result->lastRenderedDom;
 
         $result->assertSee('My DB Changed')
             ->assertViewHas('refreshIntervalInSeconds', 60);
@@ -54,7 +54,7 @@ class VaporDatabaseMetricsComponentTest extends TestCase
             ->set('tileName', 'My DB Defaults')
             ->call('render');
 
-        $html = $result->payload['dom'];
+        $html = $result->lastRenderedDom;
 
         $result->assertSee('My DB Defaults')
             ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
