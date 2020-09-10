@@ -2,6 +2,19 @@
 
 All notable changes to `fidum/laravel-dashboard-vapor-metrics-tile` will be documented in this file
 
+## 2.0.0 - 2020-09-10
+
+**Added**
+- Added Laravel 8 Support
+- Added `spatie/laravel-dashboard` 2.0.0 support
+
+**Changed**
+- Upgraded [fidum/laravel-dashboard-chart-tile](https://github.com/fidum/laravel-dashboard-chart-tile) to 4.0.0
+
+**Breaking**
+- Dropped Laravel 7 support
+- Dropped `spatie/laravel-dashboard` 1.x support
+
 ## 1.3.0 - 2020-07-05
 
 **Changed**
