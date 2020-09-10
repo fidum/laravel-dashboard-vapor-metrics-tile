@@ -29,7 +29,7 @@ class VaporEnvironmentMetricsComponentTest extends TestCase
             ->set('tileName', 'My Env Changed')
             ->call('render');
 
-        $html = $result->payload['dom'];
+        $html = $result->lastRenderedDom;
 
         $result->assertSee('My Env Changed')
             ->assertViewHas('refreshIntervalInSeconds', 60);
@@ -62,7 +62,7 @@ class VaporEnvironmentMetricsComponentTest extends TestCase
             ->set('tileName', 'My Env Defaults')
             ->call('render');
 
-        $html = $result->payload['dom'];
+        $html = $result->lastRenderedDom;
 
         $result->assertSee('My Env Defaults')
             ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
