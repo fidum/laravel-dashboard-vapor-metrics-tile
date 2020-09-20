@@ -2,6 +2,7 @@
 
 namespace Fidum\VaporMetricsTile\Commands;
 
+use Fidum\VaporMetricsTile\Commands\Concerns\VaporMetricsCommandTrait;
 use Fidum\VaporMetricsTile\Stores\VaporDatabaseMetricsStore;
 use Fidum\VaporMetricsTile\VaporMetricsClient;
 use Illuminate\Console\Command;

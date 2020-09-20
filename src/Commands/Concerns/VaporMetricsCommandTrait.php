@@ -1,6 +1,6 @@
 <?php
 
-namespace Fidum\VaporMetricsTile\Commands;
+namespace Fidum\VaporMetricsTile\Commands\Concerns;
 
 use Fidum\VaporMetricsTile\VaporMetricsClient;
 

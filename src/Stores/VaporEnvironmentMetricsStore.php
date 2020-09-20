@@ -2,6 +2,7 @@
 
 namespace Fidum\VaporMetricsTile\Stores;
 
+use Fidum\VaporMetricsTile\Stores\Concerns\VaporMetricsStoreTrait;
 use Illuminate\Support\Str;
 
 class VaporEnvironmentMetricsStore

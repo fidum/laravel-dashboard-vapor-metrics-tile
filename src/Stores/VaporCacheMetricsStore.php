@@ -2,6 +2,8 @@
 
 namespace Fidum\VaporMetricsTile\Stores;
 
+use Fidum\VaporMetricsTile\Stores\Concerns\VaporMetricsStoreTrait;
+
 class VaporCacheMetricsStore
 {
     use VaporMetricsStoreTrait;

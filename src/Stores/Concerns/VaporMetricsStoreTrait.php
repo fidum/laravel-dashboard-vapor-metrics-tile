@@ -1,6 +1,6 @@
 <?php
 
-namespace Fidum\VaporMetricsTile\Stores;
+namespace Fidum\VaporMetricsTile\Stores\Concerns;
 
 use Spatie\Dashboard\Models\Tile;
 

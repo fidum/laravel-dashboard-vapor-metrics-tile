@@ -2,6 +2,7 @@
 
 namespace Fidum\VaporMetricsTile\Components;
 
+use Fidum\VaporMetricsTile\Components\Concerns\VaporMetricsComponentTrait;
 use Fidum\VaporMetricsTile\Stores\VaporCacheMetricsStore;
 use Livewire\Component;
 

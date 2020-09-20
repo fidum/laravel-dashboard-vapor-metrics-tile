@@ -3,6 +3,7 @@
 namespace Fidum\VaporMetricsTile\Components;
 
 use Fidum\VaporMetricsTile\Charts\ChartType;
+use Fidum\VaporMetricsTile\Components\Concerns\VaporMetricsComponentTrait;
 use Livewire\Component;
 
 class VaporEnvironmentMetricsChartComponent extends Component
