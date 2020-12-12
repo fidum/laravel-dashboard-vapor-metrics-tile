@@ -2,6 +2,11 @@
 
 All notable changes to `fidum/laravel-dashboard-vapor-metrics-tile` will be documented in this file
 
+## 2.0.1 - 2020-12-12
+
+**Added**
+- Added PHP 8 Support
+
 ## 2.0.0 - 2020-09-10
 
 **Added**
