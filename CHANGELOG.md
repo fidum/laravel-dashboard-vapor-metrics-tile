@@ -6,7 +6,7 @@ All notable changes to `fidum/laravel-dashboard-vapor-metrics-tile` will be docu
 
 ### What's Changed
 
-- Upgrade to chart v5 by @dmason30 in https://github.com/fidum/laravel-dashboard-vapor-metrics-tile/pull/12
+- Upgraded [fidum/laravel-dashboard-chart-tile](https://github.com/fidum/laravel-dashboard-chart-tile) to 5.0.0 by @dmason30 in https://github.com/fidum/laravel-dashboard-vapor-metrics-tile/pull/12
 
 **Full Changelog**: https://github.com/fidum/laravel-dashboard-vapor-metrics-tile/compare/2.1.0...3.0.0
 
