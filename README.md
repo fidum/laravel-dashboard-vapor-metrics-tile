@@ -1,3 +1,6 @@
+> **Warning**
+> If you're wondering what happened to the ConsoleTVs/Charts v7 version please read this: https://github.com/ConsoleTVs/Charts/issues/1#issuecomment-1208550258
+> 
 # Vapor Metrics Tile
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/fidum/laravel-dashboard-vapor-metrics-tile.svg?style=for-the-badge)](https://packagist.org/packages/fidum/laravel-dashboard-vapor-metrics-tile)
@@ -14,7 +17,7 @@ Displays metrics for **all** of your laravel vapor projects - caches, databases 
 You can install the package via composer:
 
 ```bash
-composer require fidum/laravel-dashboard-vapor-metrics-tile
+composer require fidum/laravel-dashboard-vapor-metrics-tile:^2.0
 ```
 
 ## Usage
