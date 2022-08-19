@@ -69,9 +69,9 @@ In `app\Console\Kernel.php` you should schedule the below to run every `x` minut
 // in app/console/Kernel.php
 protected function schedule(Schedule $schedule)
 {
-    $schedule->command(Fidum\VaporMetricsTile\Commands\FetchVaporCacheMetricsCommand::class)->everyThirtyMinutes();
-    $schedule->command(Fidum\VaporMetricsTile\Commands\FetchVaporDatabaseMetricsCommand::class)->everyThirtyMinutes();
-    $schedule->command(Fidum\VaporMetricsTile\Commands\FetchVaporEnvironmentMetricsCommand::class)->everyThirtyMinutes();
+    $schedule->command(\Fidum\VaporMetricsTile\Commands\FetchVaporCacheMetricsCommand::class)->everyThirtyMinutes();
+    $schedule->command(\Fidum\VaporMetricsTile\Commands\FetchVaporDatabaseMetricsCommand::class)->everyThirtyMinutes();
+    $schedule->command(\Fidum\VaporMetricsTile\Commands\FetchVaporEnvironmentMetricsCommand::class)->everyThirtyMinutes();
 }
 ```
 

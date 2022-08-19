@@ -7,19 +7,17 @@ use Fidum\VaporMetricsTile\Charts\BarChart;
 use Fidum\VaporMetricsTile\Stores\VaporEnvironmentMetricsStore;
 use Fidum\VaporMetricsTile\Tests\TestCase;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Request;
 
 class BarChartTest extends TestCase
 {
     public function testChartEmptyData()
     {
-        $chart = app(BarChart::class);
-        $chartisan = $chart->handler(Request::merge([]));
-        $object = $chartisan->toObject();
+        $factory = BarChart::make([]);
+        $chart = $factory->chart();
 
-        $this->assertSame([], $object->chart->labels);
-        $this->assertSame($this->expectedOptions('hour'), $chart->options());
-        $this->assertSame([], $object->datasets[0]->values);
+        $this->assertSame([], $chart->labels);
+        $this->assertSame($this->expectedOptions('hour'), $chart->options);
+        $this->assertSame([], $chart->datasets[0]->values);
     }
 
     public function testChartDefaults()
@@ -30,16 +28,15 @@ class BarChartTest extends TestCase
             'averageFunctionDurationByInterval' => $data->toArray(),
         ]);
 
-        $chart = app(BarChart::class);
-        $chartisan = $chart->handler(Request::merge([]));
-        $object = $chartisan->toObject();
+        $factory = BarChart::make([]);
+        $chart = $factory->chart();
 
-        $this->assertSame($data->keys()->toArray(), $object->chart->labels);
-        $this->assertSame($this->expectedOptions('hour'), $chart->options());
+        $this->assertSame($data->keys()->toArray(), $chart->labels);
+        $this->assertSame($this->expectedOptions('hour'), $chart->options);
 
         $this->assertSame(
             $data->map(fn ($y, $x) => compact('x', 'y'))->values()->toArray(),
-            $object->datasets[0]->values,
+            $chart->datasets[0]->values,
         );
     }
 
@@ -51,16 +48,15 @@ class BarChartTest extends TestCase
             'totalCliFunctionInvocationsByInterval' => $data->toArray(),
         ]);
 
-        $chart = app(BarChart::class);
-        $chartisan = $chart->handler(Request::merge(['tileName' => 'My Env Changed', 'type' => 'cli-invocations-total']));
-        $object = $chartisan->toObject();
+        $factory = BarChart::make(['tileName' => 'My Env Changed', 'type' => 'cli-invocations-total']);
+        $chart = $factory->chart();
 
-        $this->assertSame($data->keys()->toArray(), $object->chart->labels);
-        $this->assertSame($this->expectedOptions('day'), $chart->options());
+        $this->assertSame($data->keys()->toArray(), $chart->labels);
+        $this->assertSame($this->expectedOptions('day'), $chart->options);
 
         $this->assertSame(
             $data->map(fn ($y, $x) => compact('x', 'y'))->values()->toArray(),
-            $object->datasets[0]->values,
+            $chart->datasets[0]->values,
         );
     }
 
@@ -69,9 +65,10 @@ class BarChartTest extends TestCase
     {
         config()->set('dashboard.tiles.vapor_metrics.period', $period);
 
-        $chart = app(BarChart::class);
+        $factory = BarChart::make([]);
+        $chart = $factory->chart();
 
-        $this->assertSame($this->expectedOptions($expectedUnit), $chart->options());
+        $this->assertSame($this->expectedOptions($expectedUnit), $chart->options);
     }
 
     public function unitProvider(): array
@@ -79,13 +76,13 @@ class BarChartTest extends TestCase
         //1m, 5m, 30m, 1h, 8h, 1d (default), 3d, 7d, 1M
         return [
             ['1m', 'second'],
-            ['12m', 'minute'],
+            ['5m', 'minute'],
             ['1h', 'minute'],
-            ['12h', 'hour'],
+            ['8h', 'hour'],
             ['1d', 'hour'],
-            ['12d', 'day'],
+            ['7d', 'day'],
             ['1M', 'day'],
-            ['12M', 'week'],
+            ['2M', 'week'],
         ];
     }
 
@@ -106,6 +103,9 @@ class BarChartTest extends TestCase
     private function expectedOptions(string $unit): array
     {
         return [
+            'animation' => [
+                'duration' => 0,
+            ],
             'responsive' => true,
             'maintainAspectRatio' => false,
             'legend' => [
