@@ -2,8 +2,6 @@
 
 namespace Fidum\VaporMetricsTile;
 
-use ConsoleTVs\Charts\Registrar;
-use Fidum\VaporMetricsTile\Charts\BarChart;
 use Fidum\VaporMetricsTile\Commands\FetchVaporCacheMetricsCommand;
 use Fidum\VaporMetricsTile\Commands\FetchVaporDatabaseMetricsCommand;
 use Fidum\VaporMetricsTile\Commands\FetchVaporEnvironmentMetricsCommand;

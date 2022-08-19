@@ -6,7 +6,6 @@ use Fidum\ChartTile\Charts\Chart;
 use Fidum\ChartTile\Contracts\ChartFactory;
 use Fidum\VaporMetricsTile\Stores\VaporEnvironmentMetricsStore;
 use Fidum\VaporMetricsTile\VaporMetricsClient;
-use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
