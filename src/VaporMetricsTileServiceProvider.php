@@ -18,10 +18,6 @@ class VaporMetricsTileServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        app(Registrar::class)->register([
-            BarChart::class,
-        ]);
-
         Livewire::component('vapor-environment-metrics-tile', VaporEnvironmentMetricsComponent::class);
         Livewire::component('vapor-environment-metrics-chart-tile', VaporEnvironmentMetricsChartComponent::class);
         Livewire::component('vapor-cache-metrics-tile', VaporCacheMetricsComponent::class);

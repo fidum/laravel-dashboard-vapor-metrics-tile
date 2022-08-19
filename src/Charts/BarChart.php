@@ -2,26 +2,42 @@
 
 namespace Fidum\VaporMetricsTile\Charts;
 
-use Chartisan\PHP\Chartisan;
 use Fidum\ChartTile\Charts\Chart;
+use Fidum\ChartTile\Contracts\ChartFactory;
 use Fidum\VaporMetricsTile\Stores\VaporEnvironmentMetricsStore;
 use Fidum\VaporMetricsTile\VaporMetricsClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 
-class BarChart extends Chart
+class BarChart implements ChartFactory
 {
-    public ?string $name = 'vapor_environment_metrics_chart';
+    private string $tileName;
+    private string $chartType;
 
-    public function handler(Request $request): Chartisan
+    public function __construct(string $tileName, string $chartType)
     {
-        $tileName = $this->getTileName($request);
-        $type = $request->get('type') ?: ChartType::DEFAULT;
+        $this->tileName = $tileName;
+        $this->chartType = $chartType;
+    }
 
-        $key = VaporEnvironmentMetricsStore::key($tileName);
+    public static function make(array $settings): ChartFactory
+    {
+        $defaultTile = Arr::get(array_keys(config('dashboard.tiles.vapor_metrics.environments', [])), 0, '');
+
+        return new static(
+            Arr::get($settings, 'tileName', $defaultTile),
+            Arr::get($settings, 'type', ChartType::DEFAULT)
+        );
+    }
+
+    public function chart(): Chart
+    {
+        $chart = new Chart();
+
+        $key = VaporEnvironmentMetricsStore::key($this->tileName);
         $metrics = VaporEnvironmentMetricsStore::make()->metrics($key);
-        $field = ChartType::field($type);
+        $field = ChartType::field($this->chartType);
         $data = collect($metrics[$field] ?? []);
 
         $dataset = $data->map(fn ($metric, $date) => [
@@ -29,24 +45,22 @@ class BarChart extends Chart
             'y' => number_format($metric, 0, '.', ''),
         ])->values();
 
-        return Chartisan::build()
-            ->labels($data->keys()->toArray())
-            ->dataset(ChartType::label($tileName, $type), $dataset->toArray());
+        $chart
+            ->loader(false)
+            ->labels($data->keys())
+            ->options($this->options(), true)
+            ->dataset(ChartType::label($this->tileName, $this->chartType), 'bar', $dataset)
+            ->backgroundColor('#848584');
+
+        return $chart;
     }
 
-    public function type(): string
-    {
-        return 'bar';
-    }
-
-    public function colors(): array
-    {
-        return ['#848584'];
-    }
-
-    public function options(): array
+    private function options(): array
     {
         return [
+            'animation' => [
+                'duration' => 0,
+            ],
             'responsive' => true,
             'maintainAspectRatio' => false,
             'legend' => [
@@ -82,8 +96,7 @@ class BarChart extends Chart
 
     private function period(): string
     {
-        $tileName = $this->getTileName(app(Request::class));
-        $tileConfig = config('dashboard.tiles.vapor_metrics.environments.'.$tileName) ?? [];
+        $tileConfig = config('dashboard.tiles.vapor_metrics.environments.'.$this->tileName) ?? [];
 
         return $tileConfig['period']
             ?? config('dashboard.tiles.vapor_metrics.period')
@@ -106,12 +119,5 @@ class BarChart extends Chart
         $unit = (string) $periodString->substr(-1);
 
         return $availableUnits[$unit] ?? 'hour';
-    }
-
-    private function getTileName(Request $request): string
-    {
-        $defaultTile = Arr::get(array_keys(config('dashboard.tiles.vapor_metrics.environments', [])), 0, '');
-
-        return $request->get('tileName') ?: $defaultTile;
     }
 }

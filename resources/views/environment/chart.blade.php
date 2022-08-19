@@ -1,5 +1,7 @@
+@php /** @var \Fidum\VaporMetricsTile\Charts\BarChart $chart */ @endphp
+
 @livewire('chart-tile', [
-    'chartClass' => \Fidum\VaporMetricsTile\Charts\BarChart::class,
+    'chartFactory' => \Fidum\VaporMetricsTile\Charts\BarChart::class,
     'chartFilters' => compact('tileName', 'type'),
     'height' => $height,
     'position' => $position,
