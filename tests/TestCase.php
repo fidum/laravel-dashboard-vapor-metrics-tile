@@ -6,7 +6,6 @@ use ConsoleTVs\Charts\ChartsServiceProvider;
 use Fidum\ChartTile\ChartTileServiceProvider;
 use Fidum\VaporMetricsTile\VaporMetricsTileServiceProvider;
 use Livewire\LivewireServiceProvider;
-use NunoMaduro\LaravelMojito\MojitoServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use Spatie\Dashboard\DashboardServiceProvider;
 
@@ -72,7 +71,6 @@ class TestCase extends BaseTestCase
             ChartTileServiceProvider::class,
             DashboardServiceProvider::class,
             LivewireServiceProvider::class,
-            MojitoServiceProvider::class,
             VaporMetricsTileServiceProvider::class,
         ];
     }
