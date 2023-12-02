@@ -3,44 +3,36 @@
 namespace Fidum\VaporMetricsTile\Tests\Unit\Components;
 
 use Fidum\VaporMetricsTile\Components\VaporCacheMetricsComponent;
+use Fidum\VaporMetricsTile\Components\VaporDatabaseMetricsComponent;
 use Fidum\VaporMetricsTile\Stores\VaporCacheMetricsStore;
 use Fidum\VaporMetricsTile\Tests\TestCase;
 use Fidum\VaporMetricsTile\VaporMetricsClient;
 use Livewire\Livewire;
-use Livewire\Testing\TestableLivewire;
-use NunoMaduro\LaravelMojito\ViewAssertion;
 
 class VaporCacheMetricsComponentTest extends TestCase
 {
     public function testMount()
     {
-        $component = new VaporCacheMetricsComponent('');
-        $component->mount('a1:a2', 'My Cache Defaults');
-
-        $this->assertSame($component->position, 'a1:a2');
-        $this->assertSame($component->tileName, 'My Cache Defaults');
+        Livewire::test(VaporCacheMetricsComponent::class, [
+            'position' => 'a1:a2',
+            'tileName' => 'My Cache Defaults',
+        ])
+            ->assertSet('position', 'a1:a2')
+            ->assertSet('tileName', 'My Cache Defaults');
     }
 
     public function testRenderNoResults()
     {
-        /** @var TestableLivewire $result */
-        $result = Livewire::test(VaporCacheMetricsComponent::class)
+        Livewire::test(VaporCacheMetricsComponent::class)
             ->set('position', 'a1:a2')
             ->set('tileName', 'My Cache Changed')
-            ->call('render');
-
-        $html = $result->lastRenderedDom;
-
-        $result->assertSee('My Cache Changed')
-            ->assertViewHas('refreshIntervalInSeconds', 60);
-
-        $this->assertStringNotContainsString('Node 1', $html);
-        $this->assertStringNotContainsString('Node 2', $html);
-
-        (new ViewAssertion($html))
-            ->contains('0% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
-            ->contains('0 <span class="text-dimmed text-xs">Cache Hits</span>')
-            ->contains('0 <span class="text-dimmed text-xs">Cache Misses</span>');
+            ->assertSee('My Cache Changed')
+            ->assertViewHas('refreshIntervalInSeconds', 60)
+            ->assertDontSee('Node 1')
+            ->assertDontSee('Node 2')
+            ->assertSeeHtml('0% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
+            ->assertSeeHtml('0 <span class="text-dimmed text-xs">Cache Hits</span>')
+            ->assertSeeHtml('0 <span class="text-dimmed text-xs">Cache Misses</span>');
     }
 
     public function testRenderSingleNode()
@@ -51,24 +43,16 @@ class VaporCacheMetricsComponentTest extends TestCase
             'totalCacheMisses' => [13243],
         ]);
 
-        /** @var TestableLivewire $result */
-        $result = Livewire::test(VaporCacheMetricsComponent::class)
+        Livewire::test(VaporCacheMetricsComponent::class)
             ->set('position', 'a1:a2')
             ->set('tileName', 'My Cache Defaults')
-            ->call('render');
-
-        $html = $result->lastRenderedDom;
-
-        $result->assertSee('My Cache Defaults')
-            ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
-
-        $this->assertStringNotContainsString('Node 1', $html);
-        $this->assertStringNotContainsString('Node 2', $html);
-
-        (new ViewAssertion($html))
-            ->contains('43% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
-            ->contains('1,123 <span class="text-dimmed text-xs">Cache Hits</span>')
-            ->contains('13,243 <span class="text-dimmed text-xs">Cache Misses</span>');
+            ->assertSee('My Cache Defaults')
+            ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS)
+            ->assertDontSee('Node 1')
+            ->assertDontSee('Node 2')
+            ->assertSeeHtml('43% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
+            ->assertSeeHtml('1,123 <span class="text-dimmed text-xs">Cache Hits</span>')
+            ->assertSeeHtml('13,243 <span class="text-dimmed text-xs">Cache Misses</span>');
     }
 
     public function testRenderMultipleNodes()
@@ -79,25 +63,18 @@ class VaporCacheMetricsComponentTest extends TestCase
             'totalCacheMisses' => [13243, 6654],
         ]);
 
-        /** @var TestableLivewire $result */
-        $result = Livewire::test(VaporCacheMetricsComponent::class)
+        Livewire::test(VaporCacheMetricsComponent::class)
             ->set('position', 'a1:a2')
             ->set('tileName', 'My Cache Defaults')
-            ->call('render');
-
-        $result->assertSee('My Cache Defaults')
-            ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS);
-
-        $assert = new ViewAssertion($result->lastRenderedDom);
-
-        $assert->contains('Node 1')
-            ->contains('43% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
-            ->contains('1,123 <span class="text-dimmed text-xs">Cache Hits</span>')
-            ->contains('13,243 <span class="text-dimmed text-xs">Cache Misses</span>');
-
-        $assert->contains('Node 2')
-            ->contains('75% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
-            ->contains('6,678 <span class="text-dimmed text-xs">Cache Hits</span>')
-            ->contains('6,654 <span class="text-dimmed text-xs">Cache Misses</span>');
+            ->assertSee('My Cache Defaults')
+            ->assertViewHas('refreshIntervalInSeconds', VaporMetricsClient::DEFAULT_REFRESH_SECONDS)
+            ->assertSeeHtml('Node 1')
+            ->assertSeeHtml('43% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
+            ->assertSeeHtml('1,123 <span class="text-dimmed text-xs">Cache Hits</span>')
+            ->assertSeeHtml('13,243 <span class="text-dimmed text-xs">Cache Misses</span>')
+            ->assertSeeHtml('Node 2')
+            ->assertSeeHtml('75% <span class="text-dimmed text-xs">Average CPU Utilization</span>')
+            ->assertSeeHtml('6,678 <span class="text-dimmed text-xs">Cache Hits</span>')
+            ->assertSeeHtml('6,654 <span class="text-dimmed text-xs">Cache Misses</span>');
     }
 }
