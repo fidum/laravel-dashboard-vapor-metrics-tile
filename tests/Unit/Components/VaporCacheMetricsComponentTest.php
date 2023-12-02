@@ -3,7 +3,6 @@
 namespace Fidum\VaporMetricsTile\Tests\Unit\Components;
 
 use Fidum\VaporMetricsTile\Components\VaporCacheMetricsComponent;
-use Fidum\VaporMetricsTile\Components\VaporDatabaseMetricsComponent;
 use Fidum\VaporMetricsTile\Stores\VaporCacheMetricsStore;
 use Fidum\VaporMetricsTile\Tests\TestCase;
 use Fidum\VaporMetricsTile\VaporMetricsClient;
