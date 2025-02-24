@@ -7,6 +7,7 @@ use Fidum\VaporMetricsTile\Charts\BarChart;
 use Fidum\VaporMetricsTile\Stores\VaporEnvironmentMetricsStore;
 use Fidum\VaporMetricsTile\Tests\TestCase;
 use Illuminate\Support\Collection;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class BarChartTest extends TestCase
 {
@@ -60,7 +61,7 @@ class BarChartTest extends TestCase
         );
     }
 
-    /** @dataProvider unitProvider */
+    #[DataProvider('unitProvider')]
     public function testUnit(string $period, string $expectedUnit)
     {
         config()->set('dashboard.tiles.vapor_metrics.period', $period);
@@ -71,7 +72,7 @@ class BarChartTest extends TestCase
         $this->assertSame($this->expectedOptions($expectedUnit), $chart->options);
     }
 
-    public function unitProvider(): array
+    public static function unitProvider(): array
     {
         //1m, 5m, 30m, 1h, 8h, 1d (default), 3d, 7d, 1M
         return [
