@@ -2,6 +2,15 @@
 
 All notable changes to `fidum/laravel-dashboard-vapor-metrics-tile` will be documented in this file
 
+## 4.2.0 - 2025-02-24
+
+### What's Changed
+
+* Run tests on PHP 8.4 by @dmason30 in https://github.com/fidum/laravel-dashboard-vapor-metrics-tile/pull/17
+* Add support for Laravel 12.x by @dmason30 in https://github.com/fidum/laravel-dashboard-vapor-metrics-tile/pull/18
+
+**Full Changelog**: https://github.com/fidum/laravel-dashboard-vapor-metrics-tile/compare/4.1.0...4.2.0
+
 ## 4.1.0 - 2024-03-13
 
 ### What's Changed
